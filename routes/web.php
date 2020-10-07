@@ -103,6 +103,9 @@ Route::get('/add_sample', 'SamplesController@create')->name('add_sample')->middl
 Route::get('/sample/{id}', 'SamplesController@edit')->middleware('auth');
 Route::get('/add_psample/{id}', 'SamplesController@addSample')->middleware('auth');
 Route::post('/changesStatus', 'SamplesController@changesStatus')->name('changesStatus')->middleware('auth');
+Route::get('/addmanifest', 'SamplesController@addManifests')->name('add_manifests')->middleware('auth');
+Route::post('/add_manifest', 'SamplesController@postManifests')->name('add_manifest')->middleware('auth');
+
 
 // Sites
 Route::resource('sites', 'SitesController')->middleware('auth');

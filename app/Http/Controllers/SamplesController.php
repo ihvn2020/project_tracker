@@ -236,4 +236,14 @@ class SamplesController extends Controller
         return redirect()->back();
 
     }
+
+    public function addManifests(){
+        $samples = samples::orderBy('sample_id', 'asc')->where('voided','!=',1)->paginate(50);
+        $all_samples = samples::select('sample_id','patient_id', 'specimen_id')->where('voided','!=',1)->get();
+        return view('add_manifests',compact('samples'), ['all_samples'=>$all_samples]);
+    }
+
+    public function postManifests(Request $request){
+        
+    }
 }
