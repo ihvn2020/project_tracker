@@ -204,6 +204,8 @@ $(document).ready(function(){
     $('#sales_form').each(function(){
         this.reset();
     });
+
+    $("#shipment").hide();
   
     
 }); // END DOCUMENT READY
@@ -211,7 +213,7 @@ $(document).ready(function(){
 // ADD SAMPLE ID TO MANIFEST FORM 
 function addtoManifest(sampleid,new_class){    
 
-        $("table tbody#allsamples").append("<tr scope='row' class='row"+new_class+"'><td class='input-field'><input type='text' name='sampleid[]' value='"+sampleid+"' placeholder='e.g. Sample ID'></td><td><a href='#' class='btn-floating red btn-small delpos' onClick='delRow("+new_class+")'><i class='small material-icons'>remove</i></a></td></tr>");
+        $("table tbody#allsamples").append("<tr scope='row' class='row"+new_class+"'><td class='input-field'><input type='text' name='sampleid[]' value='"+sampleid+"' readonly></td><td><a href='#' class='btn-floating red btn-small delpos' onClick='delRow("+new_class+")'><i class='small material-icons'>remove</i></a></td></tr>");
 }   
 
 

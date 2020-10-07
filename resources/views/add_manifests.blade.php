@@ -48,7 +48,7 @@
         </div>
         
        
-        <table id="products" class="display print_table responsive-table" style="width:100%;;">
+        <table class="display print_table responsive-table" style="width:100%;;">
             <thead class="thead-dark">
                 <tr>        
                     <th>Select</th>            
@@ -64,13 +64,18 @@
                 @foreach ($samples as $sat)                 
                 
                 <tr>
-                    <th>
-                    <div class="input-field">                            
-                            <div class="form-check">
-                            <input class="form-check-input" value="{{$sat->specimen_id}}" type="checkbox" name="addsample" id="addsample" onclick="addtoManifest({{$sat->specimen_id}},{{$sat->id}})">
-                            </div>                        
-                    </div>
-                    </th>
+                    <td>
+                                                 
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="remember" id="remember"  onclick="addtoManifest({{$sat->specimen_id}},{{$sat->id}})">
+
+                            <label class="form-check-label" for="remember">
+                              
+                            </label>
+                        </div>
+                    
+                
+                    </td>
                     <td>{{$sat->sample_id}}</td>
                     <td>{{$sat->patient_id}}</td>
                     <td>{{$sat->specimen_id}}</td>
@@ -79,6 +84,7 @@
                     <td>{{$sat->collection_site_id}}</td>
                     
                 </tr>
+                
                 @endforeach
             </tbody>
             <tfoot>

@@ -54,28 +54,31 @@ class SamplesController extends Controller
         $this->validate($request, [
             'patient_id' => 'required|min:3'
         ]);
+        
 
         $sample_id = "SNo".substr(md5(uniqid(mt_rand(), true).microtime(true)),0, 8); 
         $uuid = bin2hex(random_bytes(6));
-
+        
+        /*
         shipping::updateOrCreate(['shipping_manifest_id'=>$request->shipping_manifest_id],[
             'shipping_manifest_id'=>$request->shipping_manifest_id,
             'voided'=>0
         ]);
+        */
 
         samples::create([
             'sample_id'=>$sample_id,
             'patient_id'=>$request->patient_id,
-            'shipping_manifest_id'=>$request->shipping_manifest_id,
+            // 'shipping_manifest_id'=>$request->shipping_manifest_id,
             'specimen_type'=>$request->specimen_type,
             'sample_collection_date'=>$request->sample_collection_date, 
-            'laboratory_id'=>$request->laboratory_id,
+            // 'laboratory_id'=>$request->laboratory_id,
             'specimen_id'=>$request->specimen_id,
             'collection_site_id'=>$request->collection_site_id, 
             'remark'=>$request->remark,
             'sample_status'=>$request->sample_status,
             'collected_by'=>$request->collected_by,
-            'sample_signature'=>$request->sample_signature,
+            // 'sample_signature'=>$request->sample_signature,
             'date_specimen_shipped'=>"",
             'date_specimen_arrived_sequence_lab'=>"",
             'receiving_lab_officer'=>"",
@@ -244,6 +247,6 @@ class SamplesController extends Controller
     }
 
     public function postManifests(Request $request){
-        
+
     }
 }

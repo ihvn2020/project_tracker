@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="card col m8 offset-m2" style="margin-top:20px;">
+        <div class="card col m10 offset-m1" style="margin-top:20px;">
             
                 <h3 class="card-header text-center" style="text-align:center;">Add Sample Details</h3>
 
@@ -50,7 +50,7 @@
                             </div>
                             <div class="input-field col s6">
                                 <select name="collection_site_id" id="collection_site_id">
-                                <option value="@auth->user()->facility" selected>@auth->user()->facility</option>
+                                <option value="{{auth()->user()->facility}}" selected>{{auth()->user()->facility}}</option>
                                    @if (isset($sites))
                                         @foreach ($sites as $p)                                         
                                             <option value="{{$p->id}}" selected="selected">{{$p->site_name.' - '.$p->id}}</option>
@@ -93,13 +93,14 @@
                             </div>
                            
                        
-                            <div class="input-field col s6 s12">
-                                    <input id="shipping_manifest_id" type="text" class="validate" name="shipping_manifest_id" required>
-                                    <label for="shipping_manifest_id">Shipping Manifest ID <small>This will be used during shipping</small></label>
-                            </div>
+                            
                         </div>
 
-                        <div id="shipment">
+                        <div id="shipment" style="display: none;">
+                            <div class="input-field col s6 s12">
+                                    <input id="shipping_manifest_id" type="text" class="validate" name="shipping_manifest_id">
+                                    <label for="shipping_manifest_id">Shipping Manifest ID <small>This will be used during shipping</small></label>
+                            </div>
                             <div class="row">
                                 <div class="input-field col m6">
                                     <input id="date_specimen_shipped" type="text" class="datepicker" name="date_specimen_shipped">
