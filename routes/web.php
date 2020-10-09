@@ -113,7 +113,7 @@ Route::resource('sites', 'SitesController')->middleware('auth');
 // Shipping
 Route::resource('shippings', 'ShippingController')->middleware('auth');
 Route::get('/add_shipping', 'ShippingController@create')->name('add_shipping')->middleware('auth');
-Route::get('/shipping/{id}', 'ShippingController@edit')->middleware('auth');
+Route::get('/shipping/{id}', 'ShippingController@edit')->name('shipping')->middleware('auth');
 Route::post('/changesmStatus', 'ShippingController@changesmStatus')->name('changesmStatus')->middleware('auth');
 
 // Specimen Results

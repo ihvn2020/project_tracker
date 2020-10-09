@@ -211,9 +211,9 @@ $(document).ready(function(){
 }); // END DOCUMENT READY
 
 // ADD SAMPLE ID TO MANIFEST FORM 
-function addtoManifest(sampleid,new_class){    
+function addtoManifest(id,sampleid,new_class){    
 
-        $("table tbody#allsamples").append("<tr scope='row' class='row"+new_class+"'><td class='input-field'><input type='text' name='sampleid[]' value='"+sampleid+"' readonly></td><td><a href='#' class='btn-floating red btn-small delpos' onClick='delRow("+new_class+")'><i class='small material-icons'>remove</i></a></td></tr>");
+        $("table tbody#allsamples").append("<tr scope='row' class='row"+new_class+"'><td class='input-field'><input type='hidden' name='id[]' value='"+id+"'><input type='text' name='sampleids[]' value='"+sampleid+"' readonly></td><td><a href='#' class='btn-floating red btn-small delpos' onClick='delRow("+new_class+")'><i class='small material-icons'>remove</i></a></td></tr>");
 }   
 
 

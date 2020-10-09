@@ -241,12 +241,40 @@ class SamplesController extends Controller
     }
 
     public function addManifests(){
-        $samples = samples::orderBy('sample_id', 'asc')->where('voided','!=',1)->paginate(50);
+        $samples = samples::orderBy('sample_id', 'asc')->where([['voided','!=',1],['shipping_manifest_id','=',NULL]])->paginate(50);
         $all_samples = samples::select('sample_id','patient_id', 'specimen_id')->where('voided','!=',1)->get();
         return view('add_manifests',compact('samples'), ['all_samples'=>$all_samples]);
     }
 
     public function postManifests(Request $request){
+
+        $manifest_id = $request->manifest_id;
+
+        $shippingid = shipping::updateOrCreate(['shipping_manifest_id'=>$manifest_id],[
+            'shipping_manifest_id'=>$manifest_id,
+            'voided'=>0
+        ])->id;
+
+        
+        if(isset($request->id)){
+            foreach ($request->id as $key => $id) {
+                $sample = samples::where('id','=', $id);
+                $sample->update([
+                    'shipping_manifest_id'=>$manifest_id
+                ]);
+
+            }
+        }
+        
+
+        audit::create([
+            'action'=>"Created New Manifest ID: ".$manifest_id." for Samples ID: ".var_dump($request->sampleids),
+            'description'=>'A new Manifest was created',
+            'doneby'=>Auth::user()->id          
+        ]);
+        session()->flash('message','The New Manifest ID: '.$manifest_id.' has been added successfully!');
+        
+        return redirect()->route('shipping',$shippingid);
 
     }
 }

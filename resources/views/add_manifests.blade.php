@@ -21,8 +21,8 @@
             <form action="{{ route('add_manifest') }}" method="post">
                 @csrf
                 <div class="input-field col s6">
-                    <input id="specimen_id" type="text" class="validate" name="specimen_id">
-                    <label for="specimen_id">Enter Manifest ID</label>
+                    <input id="manifest_id" type="text" class="validate" name="manifest_id" required>
+                    <label for="manifest_id">Enter Manifest ID</label>
                 </div>
                 <small>Select / Add Samples From the Table Below</small>
                 <div class="row">
@@ -67,9 +67,9 @@
                     <td>
                                                  
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember"  onclick="addtoManifest({{$sat->specimen_id}},{{$sat->id}})">
+                            <input class="form-check-input" type="checkbox" id="sel{{$sat->id}}"  onclick="addtoManifest({{$sat->id}},{{$sat->specimen_id}},{{$sat->id}})">
 
-                            <label class="form-check-label" for="remember">
+                            <label class="form-check-label" for="sel{{$sat->id}}">
                               
                             </label>
                         </div>
