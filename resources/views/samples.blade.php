@@ -22,7 +22,7 @@
     </form>
         @if ($samples!=NULL)
           <div>
-              <a href="/add_sample" class="btn btn-small btn-floating right pulse btn blue darken-5"><i class="material-icons">add</i></a>
+              <a href="/add_patient" class="btn btn-small btn-floating right pulse btn blue darken-5"><i class="material-icons">add</i></a>
           </div>
         <table id="products" class="display print_table responsive-table" style="width:100%;;">
             <thead class="thead-dark">

@@ -21,7 +21,12 @@ class ShippingController extends Controller
     {
         $shippings = shipping::where('voided','!=',1)->orderBy('shipping_date', 'asc')->paginate(50);
         $all_shippings = shipping::select('shipping_manifest_id','shipping_site_id', 'tracking_waybill_number')->where('voided','!=',1)->get();
+        if(auth()->user()->role=="NL"){
+            return view('nlshippings',compact('shippings'), ['all_shippings'=>$all_shippings]);
+
+        }else{
         return view('shippings',compact('shippings'), ['all_shippings'=>$all_shippings]);
+        }
     }
 
     /**
@@ -86,6 +91,7 @@ class ShippingController extends Controller
           
         $relatedManifests->update([
             'date_specimen_shipped'=>$request->shipping_date,
+            'sample_status'=>'Delivered To Shipping Site',
             /* 'date_specimen_arrived_sequence_lab'=>$request->date_specimen_arrived_sequence_lab,
             'receiving_lab_officer'=>$request->receiving_lab_officer_name,
             'receiving_lab_officer_phone'=>$request->receiving_lab_officer_phone,
@@ -174,6 +180,7 @@ class ShippingController extends Controller
         
         $relatedManifests->update([
             'date_specimen_shipped'=>$request->shipping_date,
+            'sample_status'=>'Delivered To Shipping Site',
             /* 'date_specimen_arrived_sequence_lab'=>$request->date_specimen_arrived_sequence_lab,
             'receiving_lab_officer'=>$request->receiving_lab_officer_name,
             'receiving_lab_officer_phone'=>$request->receiving_lab_officer_phone,
@@ -251,7 +258,7 @@ class ShippingController extends Controller
     {
          $shipping = shipping::where('id','=', $request->id);
 
-        $relatedManifests = samples::where('shipping_manifest_id','=', $request->shipping_manifest_id);
+        
 
         $shipping->update([
             'receiving_lab_officer_name'=>$request->receiving_lab_officer_name,
@@ -265,7 +272,10 @@ class ShippingController extends Controller
             'date_updated'=>date("Y-m-d")
         ]);
 
+        $relatedManifests = samples::where('shipping_manifest_id','=', $request->shipping_manifest_id);
+
         $relatedManifests->update([
+            'sample_status'=>'Delivered To NL Lab',
             'updated_by'=>Auth::user()->id,
             'date_updated'=>date("Y-m-d")            
         ]);

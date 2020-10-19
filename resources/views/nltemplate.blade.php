@@ -26,7 +26,7 @@
       <ul class="right hide-on-med-and-down">
       
         <li><a href="/">Dashboard</a></li>
-        <li><a href="/edit_settings/1">Settings</a></li>
+       
         <li><a href="/help" target="_blank">Help</a></li>
         <li>
           
@@ -50,22 +50,8 @@
       <li class="teal center"><a href="#"><i class="material-icons">menu</i>RESTHUB Manager</a></li>
       <li><a class="collapsible-header waves-effect waves-blue" href="/"><i class="material-icons">dashboard</i>DASHBOARD</a></li>        
         
-      @if (auth()->user()->role=='Admin')
-        <li class="white">
-          <ul class="collapsible collapsible-accordion">
-            
-                <li>
-                  <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">list</i>Patient Management<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
-                  <div class="collapsible-body">
-                    <ul>
-                      <li><a class="waves-effect waves-blue" href="/patients"><i class="material-icons">fullscreen</i>View All<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
-                      <li><a class="waves-effect waves-blue" href="/add_patient"><i class="material-icons">swap_horiz</i>Add New<span class="new badge right yellow darken-3"></span></a></li>
-                      <li><a class="waves-effect waves-blue" href="/patient_records"><i class="material-icons">transfer</i>Records<span class="new badge right yellow darken-3"></span></a></li>
-                    </ul>
-                  </div>
-                </li>
-          </ul>
-        </li>
+
+        
 
         <li class="white">
           <ul class="collapsible collapsible-accordion">
@@ -74,8 +60,7 @@
                   <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">list</i>Samples Management<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
                   <div class="collapsible-body">
                     <ul>
-                      <li><a class="waves-effect waves-blue" href="/samples"><i class="material-icons">fullscreen</i>View All<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
-                      <li><a class="waves-effect waves-blue" href="/add_sample"><i class="material-icons">swap_horiz</i>Add New<span class="new badge right yellow darken-3"></span></a></li>
+                      <li><a class="waves-effect waves-blue" href="/nl_samples"><i class="material-icons">fullscreen</i>View All<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
                     </ul>
                   </div>
                 </li>
@@ -89,62 +74,18 @@
                   <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">list</i>Manifests and Shipping<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
                   <div class="collapsible-body">
                     <ul>
-                      <li><a class="waves-effect waves-blue" href="/addmanifest"><i class="material-icons">swap_horiz</i>Create New Manifest<span class="new badge right yellow darken-3"></span></a></li>
                       <li><a class="waves-effect waves-blue" href="/shippings"><i class="material-icons">fullscreen</i>View All<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
-                      <li><a class="waves-effect waves-blue" href="/add_shipping"><i class="material-icons">swap_horiz</i>Add New Shipping<span class="new badge right yellow darken-3"></span></a></li>
                     </ul>
                   </div>
                 </li>
           </ul>
         </li>
 
-        <li class="white">
-          <ul class="collapsible collapsible-accordion">
-            
-                <li>
-                  <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">list</i>Sites Management<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
-                  <div class="collapsible-body">
-                    <ul>
-                      <li><a class="waves-effect waves-blue" href="/sites"><i class="material-icons">fullscreen</i>View All<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
-                      <li><a class="waves-effect waves-blue" href="/sites"><i class="material-icons">swap_horiz</i>Add New<span class="new badge right yellow darken-3"></span></a></li>
-                    </ul>
-                  </div>
-                </li>
-          </ul>
-        </li>
-         
-      @elseif(auth()->user()->role=='Staff')
-
-        <li class="white"><a href="/samples">Samples</a></li>
-        <li class="white"><a href="/samples">View All</a></li>
-
-      @endif
-        <li class="white"><div class="divider"></div></li> 
-      
-      @if (auth()->user()->role=='Admin')
-        <li class="white">
-          <ul class="collapsible collapsible-accordion">
-            <li>
-              <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">folder_open</i>System Management<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
-              <div class="collapsible-body">
-                <ul>
-                  <li><a class="waves-effect waves-blue" href="/users"><i class="material-icons">fullscreen</i>Users</a></li>
-                  <li><a class="waves-effect waves-blue" href="/facilities"><i class="material-icons">swap_horiz</i>Facilities</a></li>
-                  <li><a class="waves-effect waves-blue" href="/departments"><i class="material-icons">fullscreen</i>Departments</a></li>
-                  <li><a class="waves-effect waves-blue" href="/units"><i class="material-icons">swap_horiz</i>Units</a></li>     
-                  <li><a class="waves-effect waves-blue" href="/audits"><i class="material-icons">swap_horiz</i>Audit Trail</a></li>      
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </li>
-      
-        <li class="white"><div class="divider"></div></li>      
         
-        <li class="white"><a class="waves-effect waves-blue" href="/reports"><i class="material-icons">swap_horiz</i>Activity Report</a></li>                  
-        <li class="white"><div class="divider"></div></li>
-      @endif
-        <li class="white"><a href="/edit_settings/1"><i class="material-icons">settings</i>Settings</a></li>
+         
+     
+        <li class="white"><div class="divider"></div></li> 
+ 
         <li class="white"><a href="/help"><i class="material-icons">help</i>Help</a></li>
         <li class="green">  
                 <a class="btn-flat dropdown-button waves-effect waves-light white-text large" href="#" data-activates="profile-dropdown2">@auth {{auth()->user()->name}} @endauth <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
@@ -175,36 +116,7 @@
 </main>
 
 <!-- Gitter Chat Link -->
-  <div class="fixed-action-btn click-to-toggle hide_on_print" style="bottom: 45px; right: 24px;">
-      <a class="btn-floating btn-large pink waves-effect waves-light">
-          <i class="large material-icons">apps</i>
-      </a>
 
-      <ul>
-          <li>
-              <a class="btn-floating tooltipped" data-position="top" data-tooltip="View All Patients" href="/patients" target="_blank"><i class="material-icons" title>people</i></a>
-          </li>
-          <li>
-              <a class="btn-floating tooltipped" data-position="top" data-tooltip="Samples" href="/samples"><i class="material-icons" title>list</i></a>
-          </li>
-          <li>
-          <a class="btn-floating blue tooltipped" data-position="top" data-tooltip="Sites" href="/sites"><i class="material-icons">house</i></a>
-          </li>
-
-          <li> 
-          <a class="btn-floating purple darken-1 tooltipped" data-position="top" data-tooltip="Shipping" href="/shippings"><i class="material-icons">local_shipping
-            </i></a>
-          </li>
-
-          <li>
-          <a class="btn-floating green tooltipped" data-position="top" data-tooltip="Users/Operators" href="/users"><i class="material-icons">people</i></a>          
-          </li>
-
-          <li>
-          <a class="btn-floating blue btn-large tooltipped" data-position="top" data-tooltip="Results" href="/specimens"><i class="material-icons">check</i></a>          
-          </li>
-      </ul>
-  </div>
 
   <footer class="page-footer blue darken-2">
     <div class="container">
@@ -217,15 +129,13 @@
           <h6>Links</h6>
           <ul>
             <li><a href="/" class="grey-text text-lighten-3">Dashboard</a></li>
-            <li><a href="/inventories" class="grey-text text-lighten-3">Records</a></li>
-            <li><a href="/manage_users" class="grey-text text-lighten-3">Users</a></li>
+            
           </ul>
         </div>
         <div class="col l2 s6">
           <h6>System Managment</h6>
           <ul>
             <li><a href="/help" class="grey-text text-lighten-3">Help</a></li>
-            <li><a href="/edit_settings" class="grey-text text-lighten-3">Settings</a></li>
             <li><a href="/help" class="grey-text text-lighten-3">Support</a></li>
           </ul>
         </div>

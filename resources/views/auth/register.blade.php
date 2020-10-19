@@ -48,6 +48,9 @@
                         <div class="input-field">
                             <select name="facility" id="facility" materialize="material_select">
                                 <option value="facility" selected>Facility</option>
+                                @php
+                                 $facilities = \App\facilities::select('id','facility_name')->get();
+                                @endphp
                                 @foreach ($facilities as $facility)                                            
                                 <option value="{{$facility->id}}">{{$facility->facility_name}}</option>
                                 @endforeach
@@ -58,6 +61,10 @@
                         <div class="input-field">
                             <select name="department" id="department" materialize="material_select">
                                 <option value="department" selected>Department</option>
+
+                                @php
+                                $departments = \App\department::select('id','department_name')->get();
+                               @endphp
                                 @foreach ($departments as $department)                                            
                                 <option value="{{$department->id}}">{{$department->department_name}}</option>
                                 @endforeach
@@ -68,6 +75,10 @@
                         <div class="input-field">
                             <select name="unit" id="unit" materialize="material_select">
                                 <option value="unit" selected>Unit</option>
+                                @php
+                                $units = \App\unit::select('id','unit_name')->get();
+                               @endphp
+
                                 @foreach ($units as $unit)                                            
                                 <option value="{{$unit->id}}">{{$unit->unit_name}}</option>
                                 @endforeach
@@ -81,6 +92,9 @@
                                 <option value="Admin">Admin</option>
                                 <option value="Manager">Manager</option>
                                 <option value="User">User</option>
+                                <option value="SC">Sample Collection</option>
+                                <option value="NL">Sequence Lab</option>
+                                <option value="Doctor">Doctor</option>
                             </select>
                             <label for="role">Select Role</label>
                         </div>

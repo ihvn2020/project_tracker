@@ -91,33 +91,9 @@
                     
                     <td>                    
                         
-                        <div class="fixed-action-btn horizontal direction-top direction-left click-to-toggle sales_action" style="position: relative !important; float: text-align: center; display: inline-block; bottom: 0px !important; padding: 0px !important">
-                                <a class="btn-floating btn-small btn blue darken-5 waves-effect waves-light" style="display: inline-block" >
-                                    <i class="small material-icons">menu</i>
-                                </a>
-                                <ul style="top: 0px !important">
-                                    
-                                    
-                                    <li>
-                                            <form method="POST" action="{{route('shippings.destroy',$sh->id)}}">
-                                                @csrf
-                                                @method('DELETE')
-                                            <button onclick="return confirm('Are you sure you want to delete this shipping data?')" class="btn-floating btn-small waves-effect red waves-light tooltipped" data-position="top" data-tooltip="Delete this Sample"><i class="material-icons">delete</i></button>
-                                            </form>
-                                    </li>
-                          
-                                    
-                                    <li>
-                                            <a href="/shipping/{{$sh->id}}" class="btn-floating btn-small waves-effect btn blue darken-5 waves-light tooltipped" data-position="top" data-tooltip="View/Update this Shipping info"><i class="material-icons" >edit</i></a>          
-                                    </li>
-
-                                      
-                                    <li>
-                                            <a href="/manifestconfirm/{{$sh->id}}" class="btn-floating btn-small waves-effect btn blue darken-5 waves-light tooltipped" data-position="top" data-tooltip="Add Manifest Reception and Confirmation"><i class="material-icons" >add</i></a>          
-                                    </li>
-
-                                </ul>
-                        </div>
+                        
+                                            <a href="/manifestconfirm/{{$sh->id}}" class="btn btn-small waves-effect btn blue darken-5 waves-light tooltipped" data-position="top" data-tooltip="Add Manifest Reception and Confirmation"><i class="material-icons" >add</i></a>          
+                                  
                         
                     </td>
                 </tr>

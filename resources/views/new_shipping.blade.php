@@ -110,7 +110,7 @@
                             </div>
                         -->
                        <div class="input-field col m6 s12">
-                                <input id="manifest_status" type="text" class="validate" name="manifest_status">
+                                <input id="manifest_status" type="text" class="validate" name="manifest_status" value="Delivered To Shipping Site">
                                 <label for="manifest_status">Manifest Status</label>
                         </div>
 

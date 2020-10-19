@@ -27,6 +27,11 @@ class SamplesController extends Controller
 
     }
 
+    public function nl_samples(){
+        $samples = samples::orderBy('sample_id', 'asc')->where('voided','!=',1)->where('sample_status','Delivered To Shipping Site')->paginate(50);
+        $all_samples = samples::select('sample_id','patient_id', 'specimen_id')->where('voided','!=',1)->where('sample_status','Delivered To Shipping Site')->get();
+        return view('nl_samples',compact('samples'), ['all_samples'=>$all_samples]);
+    }
     /**
      * Show the form for creating a new resource.
      *

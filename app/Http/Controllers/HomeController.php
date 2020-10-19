@@ -34,31 +34,39 @@ class HomeController extends Controller
                  ->get();
         */
 
-        $computercount = inventory ::select(DB::raw("count(*) as count"))
-        ->where('category','Computers')        
-        ->groupBy(DB::raw("facility_id"))
-        ->orderBy("facility_id")
-        ->get()->toArray();
+        if(auth()->user()->role=="NL"){
+            return redirect('nl_samples');
+        }else{
+            $computercount = inventory ::select(DB::raw("count(*) as count"))
+            ->where('category','Computers')        
+            ->groupBy(DB::raw("facility_id"))
+            ->orderBy("facility_id")
+            ->get()->toArray();
 
-        $computers = array_column($computercount, 'count');
+            $computers = array_column($computercount, 'count');
 
-        $furniturecount = inventory ::select(DB::raw("count(*) as count")) 
-        ->where('category','Furnitures')        
-        ->groupBy(DB::raw("facility_id"))
-        ->orderBy("facility_id")
-        ->get()->toArray();
+            $furniturecount = inventory ::select(DB::raw("count(*) as count")) 
+            ->where('category','Furnitures')        
+            ->groupBy(DB::raw("facility_id"))
+            ->orderBy("facility_id")
+            ->get()->toArray();
 
-        $furnitures = array_column($furniturecount, 'count');
+            $furnitures = array_column($furniturecount, 'count');
 
-        return view('dashboard')
-        ->with('computers',json_encode($computers,JSON_NUMERIC_CHECK))
-        ->with('furnitures',json_encode($furnitures,JSON_NUMERIC_CHECK));
+            return view('dashboard')
+            ->with('computers',json_encode($computers,JSON_NUMERIC_CHECK))
+            ->with('furnitures',json_encode($furnitures,JSON_NUMERIC_CHECK));
+        }
 
     }
 
     public function user_dashboard()
     {
-        $inventories = inventory::where('user_id',auth()->user()->id)->orderBy('item_name', 'asc')->paginate(100);
-        return view('user_dashboard', compact('inventories'));
+        if(auth()->user()->role=="NL"){
+            return route('nl_samples');
+        }else{
+
+            return route('nl_samples');
+        }
     }
 }

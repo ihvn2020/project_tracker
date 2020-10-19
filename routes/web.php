@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Welcome and Home Pages
-Route::get('/', 'HomeController@index')->name('dashboard')->middleware('role:Admin');
+Route::get('/', 'HomeController@index')->name('dashboard')->middleware('role:Admin,NL');
 
-Route::get('dashboard', 'HomeController@index')->name('dashboard')->middleware('role:Admin');
+Route::get('/dashboard', 'HomeController@index')->name('dashboard')->middleware('role:Admin,NL');
 
-Route::get('/home', 'HomeController@user_dashboard')->name('home')->middleware('auth');
+// Route::get('/home', 'HomeController@user_dashboard')->name('home')->middleware('auth');
 
 
 // Settings
@@ -99,6 +99,7 @@ Route::get('patient/{id}', 'PatientsController@edit')->middleware('auth');
 
 // Samples
 Route::resource('samples', 'SamplesController')->middleware('auth');
+Route::get('/nl_samples', 'SamplesController@nl_samples')->name('nl_samples')->middleware('auth');
 Route::get('/add_sample', 'SamplesController@create')->name('add_sample')->middleware('auth');
 Route::get('/sample/{id}', 'SamplesController@edit')->middleware('auth');
 Route::get('/add_psample/{id}', 'SamplesController@addSample')->middleware('auth');
