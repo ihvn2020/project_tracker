@@ -69,9 +69,11 @@ class ShippingController extends Controller
             'number_of_cryovial_tubes'=>$request->number_of_cryovial_tubes,
             'tracking_waybill_number'=>$request->tracking_waybill_number,
             'processing_site_id'=>$request->processing_site_id,
+            /*
             'receiving_lab_officer_name'=>$request->receiving_lab_officer_name,
             'receiving_lab_officer_phone'=>$request->receiving_lab_officer_phone,
             'manifest_status'=>$request->manifest_status,
+            */
             'voided'=>0,
             'date_voided'=>"",
             'voided_by'=>"",
@@ -84,9 +86,10 @@ class ShippingController extends Controller
           
         $relatedManifests->update([
             'date_specimen_shipped'=>$request->shipping_date,
-            // 'date_specimen_arrived_sequence_lab'=>$request->date_specimen_arrived_sequence_lab,
+            /* 'date_specimen_arrived_sequence_lab'=>$request->date_specimen_arrived_sequence_lab,
             'receiving_lab_officer'=>$request->receiving_lab_officer_name,
             'receiving_lab_officer_phone'=>$request->receiving_lab_officer_phone,
+            */
             // Bring down some values here         
             'updated_by'=>Auth::user()->id,
             'date_updated'=>date("Y-m-d")            
@@ -157,9 +160,11 @@ class ShippingController extends Controller
             'number_of_cryovial_tubes'=>$request->number_of_cryovial_tubes,
             'tracking_waybill_number'=>$request->tracking_waybill_number,
             'processing_site_id'=>$request->processing_site_id,
+            /*
             'receiving_lab_officer_name'=>$request->receiving_lab_officer_name,
             'receiving_lab_officer_phone'=>$request->receiving_lab_officer_phone,
             'manifest_status'=>$request->manifest_status,
+            */
             'voided'=>0,
             'date_voided'=>"",
             'voided_by'=>"",
@@ -169,9 +174,10 @@ class ShippingController extends Controller
         
         $relatedManifests->update([
             'date_specimen_shipped'=>$request->shipping_date,
-            // 'date_specimen_arrived_sequence_lab'=>$request->date_specimen_arrived_sequence_lab,
+            /* 'date_specimen_arrived_sequence_lab'=>$request->date_specimen_arrived_sequence_lab,
             'receiving_lab_officer'=>$request->receiving_lab_officer_name,
             'receiving_lab_officer_phone'=>$request->receiving_lab_officer_phone,
+            */
             // Bring down some values here         
             'updated_by'=>Auth::user()->id,
             'date_updated'=>date("Y-m-d")            
@@ -227,5 +233,51 @@ class ShippingController extends Controller
 
         return redirect()->back();
 
+    }
+
+    public function reception($id)
+    {
+        $samples = samples::select('shipping_manifest_id')->get();
+        $sites = sites::select('id','site_name')->get();
+
+        $users = User::select('id','name')->get();
+        $shipping = shipping::where('id',$id)->first();
+
+        return view('manifest_reception')->with(['samples'=>$samples, 'users'=>$users,'sites'=>$sites,'shipping'=>$shipping]);
+
+    }
+
+    public function postreception(Request $request, shipping $shipping)
+    {
+         $shipping = shipping::where('id','=', $request->id);
+
+        $relatedManifests = samples::where('shipping_manifest_id','=', $request->shipping_manifest_id);
+
+        $shipping->update([
+            'receiving_lab_officer_name'=>$request->receiving_lab_officer_name,
+            'receiving_lab_officer_phone'=>$request->receiving_lab_officer_phone,
+            'manifest_status'=>$request->manifest_status,
+            'remarks'=>$request->remarks,
+            'voided'=>0,
+            'date_voided'=>"",
+            'voided_by'=>"",
+            'updated_by'=>Auth::user()->id,
+            'date_updated'=>date("Y-m-d")
+        ]);
+
+        $relatedManifests->update([
+            'updated_by'=>Auth::user()->id,
+            'date_updated'=>date("Y-m-d")            
+        ]);
+
+
+        audit::create([
+            'action'=>"Updated Manifest Reception, Manifest ID: ".$request->shipping_manifest_id,
+            'description'=>'A Manifest Was Recieved',
+            'doneby'=>Auth::user()->id          
+        ]);
+        session()->flash('message','The Manifest / Shipping Record with Manifest ID : '.$request->shipping_manifest_id.' was updated successfully!');
+        
+        return redirect()->back();
     }
 }

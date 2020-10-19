@@ -135,7 +135,11 @@ $(document).ready(function(){
         $("tr:eq(1)").remove();
         $('.dtsp-panesContainer').remove();
     });
-    
+
+    // ADD DRUG RESISTANCE
+    $("#addanother").click(function(){
+        $('.dres').clone().appendTo('.addres');
+    });   
 
 
     $("#quantity").on('keyup', function (e) {

@@ -51,24 +51,28 @@ class DrugResistanceController extends Controller
             'sample_id' => 'required|min:3'
         ]);
 
-        $uuid = bin2hex(random_bytes(6));
-
-        drug_resistance::create([
-            'result_id'=>$request->result_id,
-            'drug_name'=>$request->drug_name,
-            // 'result_date'=>date("Y-m-d", strtotime($request->result_date)),
-            'gene_mutation'=>$request->gene_mutation,
-            'locus'=>$request->locus, 
-            'interpretation'=>$request->interpretation,
-            'comments'=>$request->comments,
-            'number_of_isolates'=>$request->number_of_isolates,
-            'accuracy_value_sensitivity'=>$request->accuracy_value_sensitivity, 
-            'accuracy_value_specificity'=>$request->accuracy_value_specificity,
-            'sample_id'=>$request->sample_id,
-            'entered_by'=>Auth::user()->id,
-            'date_entered'=>date("Y-m-d"),
-            'uuid'=>$uuid,
-        ]);
+        
+        
+        foreach($request->drug_name as $key => $drug_name){
+            $uuid = bin2hex(random_bytes(6));        
+            drug_resistance::create([
+                'result_id'=>$request->result_id,
+                'drug_name'=>$drug_name,
+                // 'result_date'=>date("Y-m-d", strtotime($request->result_date)),
+                'gene_mutation'=>$request->gene_mutation[$key],
+                'locus'=>$request->locus[$key], 
+                'interpretation'=>$request->interpretation[$key],
+                'comments'=>$request->comments[$key],
+                'number_of_isolates'=>$request->number_of_isolates[$key],
+                'accuracy_value_sensitivity'=>$request->accuracy_value_sensitivity[$key], 
+                'accuracy_value_specificity'=>$request->accuracy_value_specificity[$key],
+                'sample_id'=>$request->sample_id,
+                'entered_by'=>Auth::user()->id,
+                'date_entered'=>date("Y-m-d"),
+                'uuid'=>$uuid,
+            ]);
+    
+        }
 
         audit::create([
             'action'=>"Created New Drug Resistance for Result ID: ".$request->result_id,

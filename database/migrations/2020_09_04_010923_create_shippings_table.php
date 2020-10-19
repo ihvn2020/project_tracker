@@ -31,6 +31,7 @@ class CreateShippingsTable extends Migration
             $table->string('receiving_lab_officer_name')->nullable();
             $table->string('receiving_lab_officer_phone')->nullable();
             $table->string('manifest_status')->nullable();
+            $table->string('remarks')->nullable();
             $table->string('entered_by')->nullable();
             $table->string('date_entered')->nullable();
             $table->string('updated_by')->nullable();

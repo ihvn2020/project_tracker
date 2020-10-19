@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
         DB::table('settings')->insert([
             'organization_name' => 'TB, Nigeria',
             'description' => '...tb sampling, sequencing, reporting and tb data management',
-            'logo' => 'tblogo.png',
+            'logo' => 'resthubLogo.jpg',
             'address' => 'Central Business District, Abuja',
             'phone_number' => '2348012345678',
             'copyright' => 'TB 2020 '.date("Y").'&copy; All Rights Reserved',

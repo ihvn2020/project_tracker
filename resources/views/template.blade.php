@@ -86,11 +86,12 @@
           <ul class="collapsible collapsible-accordion">
             
                 <li>
-                  <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">list</i>Shipping Management<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                  <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">list</i>Manifests and Shipping<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
                   <div class="collapsible-body">
                     <ul>
+                      <li><a class="waves-effect waves-blue" href="/addmanifest"><i class="material-icons">swap_horiz</i>Create New Manifest<span class="new badge right yellow darken-3"></span></a></li>
                       <li><a class="waves-effect waves-blue" href="/shippings"><i class="material-icons">fullscreen</i>View All<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
-                      <li><a class="waves-effect waves-blue" href="/add_shipping"><i class="material-icons">swap_horiz</i>Add New<span class="new badge right yellow darken-3"></span></a></li>
+                      <li><a class="waves-effect waves-blue" href="/add_shipping"><i class="material-icons">swap_horiz</i>Add New Shipping<span class="new badge right yellow darken-3"></span></a></li>
                     </ul>
                   </div>
                 </li>

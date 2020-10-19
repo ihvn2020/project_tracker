@@ -59,7 +59,7 @@ class SpecimenResultsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'sample_id' => 'required|min:3'
+            'specimen_id' => 'required|min:3'
         ]);
 
         $uuid = bin2hex(random_bytes(6));
@@ -86,11 +86,11 @@ class SpecimenResultsController extends Controller
 
 
         $result_id = specimen_results::create([
-            'sample_id'=>$request->sample_id,
+            'sample_id'=>$request->specimen_id,
             'specimen_result'=>$request->specimen_result,
             'result_date'=>date("Y-m-d", strtotime($request->result_date)),
             'processing_site_id'=>$request->processing_site_id,
-            'result_signatures'=>$request->result_signatures, 
+           // 'result_signatures'=>$request->result_signatures, 
             'fasta_file_path'=>$fastafile,
             'fasta_file_text'=>$request->fasta_file_text,
             'abi_file_path'=>$abifile, 
@@ -100,7 +100,12 @@ class SpecimenResultsController extends Controller
             'updated_by'=>Auth::user()->id,
             'uuid'=>$uuid,
         ])->id;
-
+        
+        // Update Sample Info
+        $sample = samples::where('id','=', $request->id);
+        $sample->update([           
+            'sample_status'=>'Result Added'           
+        ]);
 
         if($request->hasFile('fasta'))
         {

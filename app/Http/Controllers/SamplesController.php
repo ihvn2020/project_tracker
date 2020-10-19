@@ -216,7 +216,7 @@ class SamplesController extends Controller
         $sample = samples::where('id','=', $id)->first();
 
         if(isset($sample->id)){    
-            $specimens = specimen_results::where('sample_id',$sample->sample_id)->get();     
+            $specimens = specimen_results::where('sample_id',$sample->specimen_id)->get();     
             session()->flash('message','Note: All samples related to this Shipment manifest ID will be updated with shipping information.');
             return view('sample')->with(['patients'=>$patients,'users'=>$users,'sample'=>$sample,'sites'=>$sites,'specimens'=>$specimens]);   
         }else{
@@ -252,6 +252,7 @@ class SamplesController extends Controller
 
         $shippingid = shipping::updateOrCreate(['shipping_manifest_id'=>$manifest_id],[
             'shipping_manifest_id'=>$manifest_id,
+            'number_of_cryovial_tubes'=>count($request->id),
             'voided'=>0
         ])->id;
 

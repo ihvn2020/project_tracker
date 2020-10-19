@@ -16,7 +16,7 @@ class CreateDrugResistancesTable extends Migration
     {
         Schema::create('drug_resistances', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('result_id')->unique();
+            $table->unsignedBigInteger('result_id');
             $table->foreign('result_id')->references('id')->on('specimen_results')->onDelete('cascade');            
             $table->string('drug_name')->nullable();
             $table->string('gene_mutation')->nullable();

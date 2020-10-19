@@ -3,6 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="card col m8 offset-m2" style="margin-top:20px;">
+            <a href="/samples" class="btn green">Go Back</a>
             
                 <h3 class="card-header text-center" style="text-align:center;">Update Shipping Info</h3>
 
@@ -70,7 +71,7 @@
                         <h6>Samples Info</h6>
                         <div class="row">
                             <div class="input-field col s4">
-                            <input id="number_of_cryovial_tubes" type="number" class="validate" name="number_of_cryovial_tubes" value="{{count($samples)}}">
+                            <input id="number_of_cryovial_tubes" type="number" class="validate" name="number_of_cryovial_tubes" value="{{$shipping->number_of_cryovial_tubes}}">
                                 <label for="number_of_cryovial_tubes">Number of Cryovial Tubes</label>
                             </div>
                             <div class="input-field col s4">
@@ -90,20 +91,22 @@
                             </div>
 
                         </div>
-                        <h6>Receiving Lab Info</h6>
-                       <div class="row">
-                            <div class="input-field col m6 s12">
-                                    <input id="receiving_lab_officer_name" type="text" class="validate" name="receiving_lab_officer_name"  value="{{$shipping->receiving_lab_officer_name}}">
-                                    <label for="receiving_lab_officer_name">Receiving Lab Officer Name</label>
-                            </div>
+                         <!--
+                                <h6>Receiving Lab Info</h6>
+                            <div class="row">
+                                    <div class="input-field col m6 s12">
+                                            <input id="receiving_lab_officer_name" type="text" class="validate" name="receiving_lab_officer_name"  value="{{$shipping->receiving_lab_officer_name}}">
+                                            <label for="receiving_lab_officer_name">Receiving Lab Officer Name</label>
+                                    </div>
 
-                            <div class="input-field col m6 s12">
-                                <input id="receiving_lab_officer_phone" type="text" class="validate" name="receiving_lab_officer_phone" value="{{$shipping->receiving_lab_officer_phone}}">
-                                <label for="receiving_lab_officer_phone">Receiving Lab Officer Phone</label>
-                            </div>
+                                    <div class="input-field col m6 s12">
+                                        <input id="receiving_lab_officer_phone" type="text" class="validate" name="receiving_lab_officer_phone" value="{{$shipping->receiving_lab_officer_phone}}">
+                                        <label for="receiving_lab_officer_phone">Receiving Lab Officer Phone</label>
+                                    </div>
 
-                            
-                       </div>
+                                    
+                            </div>
+                        -->
                        <div class="input-field col m6 s12">
                                 <input id="manifest_status" type="text" class="validate" name="manifest_status" value="{{$shipping->manifest_status}}">
                                 <label for="manifest_status">Manifest Status</label>

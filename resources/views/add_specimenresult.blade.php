@@ -11,14 +11,14 @@
                         @csrf
                         <div class="row">
                             <div class="input-field col m6">
-                                <select name="sample_id" id="sample_id">
+                                <select name="specimen_id" id="specimen_id">
                                     @if (isset($samples))
                                          @foreach ($samples as $s)                                         
-                                             <option value="{{$s->sample_id}}" selected="selected">{{$s->sample_id.' - '.$s->patient_id.' - '.$s->specimen_id}}</option>
+                                             <option value="{{$s->specimen_id}}" selected="selected">{{$s->specimen_id.' - '.$s->patient_id}}</option>
                                          @endforeach
                                      @endif
                                  </select>
-                                <label for="sample_id">Sample ID <small>(sample id - patient id -specimen -id)</small></label>
+                                <label for="specimen_id">Specimen ID <small>(Specimen ID - patient id)</small></label>
                             </div>
 
                             <div class="input-field col m4">
@@ -62,10 +62,12 @@
                       
                         
                         <div class="row">
-                            <div class="input-field col s12">
-                                    <textarea id="result_signatures" class="materialize-textarea" name="result_signatures"></textarea>                         
-                                    <label for="result_signatures" >Result Signatures</label>
-                            </div>
+                            <!--
+                                <div class="input-field col s12">
+                                        <textarea id="result_signatures" class="materialize-textarea" name="result_signatures"></textarea>                         
+                                        <label for="result_signatures" >Result Signatures</label>
+                                </div>
+                            -->
 
                             <div class="file-field input-field col s12">
                                 <div class="btn cyan darken-4">

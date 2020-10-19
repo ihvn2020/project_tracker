@@ -3,13 +3,13 @@
 @section('content')
     
     <div class = "row" style="width:98%; margin:auto;">
-        <h5 class="text-center">All Shipments</h5>
+        <h5 class="text-center">All Manifests</h5>
     <form action="product_search" method="post">
         <input type="hidden" name="table" value="shipping">
         @csrf
         <div class="input-field col m6 offset-m2">
             <select name="keyword" id="keyword" class="browser-default" style="width: 100% !important;">
-                    <option value="-" selected>Search All Shippings Here</option>
+                    <option value="-" selected>Search All Manifests Here</option>
                     @foreach ($all_shippings as $sa)                  
                     
                         <option value="{{$sa->id}}">{{$sa->shipping_manifest_id}} - {{$sa->shipping_site_id}} - {{$sa->tracking_waybill_number}}</option>                                                 
@@ -41,7 +41,7 @@
                     <th>Tracking W. No</th>
                     <th>Processing Site</th>
                     <th>Receivers Contacts</th>
-                    <th>Manifest Status</th>
+                    <th>Status/Remarks</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -85,6 +85,8 @@
                        
                     </div>
                     </form>
+                    <br>
+                    {{$sh->remarks}}
                     </td>     
                     
                     <td>                    
@@ -106,6 +108,11 @@
                                     
                                     <li>
                                             <a href="/shipping/{{$sh->id}}" class="btn-floating btn-small waves-effect btn blue darken-5 waves-light tooltipped" data-position="top" data-tooltip="View/Update this Shipping info"><i class="material-icons" >edit</i></a>          
+                                    </li>
+
+                                      
+                                    <li>
+                                            <a href="/manifestconfirm/{{$sh->id}}" class="btn-floating btn-small waves-effect btn blue darken-5 waves-light tooltipped" data-position="top" data-tooltip="Add Manifest Reception and Confirmation"><i class="material-icons" >add</i></a>          
                                     </li>
 
                                 </ul>

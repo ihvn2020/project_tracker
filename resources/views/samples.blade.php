@@ -58,6 +58,7 @@
                                     <option value="{{$sat->sample_status}}" selected>{{$sat->sample_status}}</option>
                                     <option value="Collected">Sample Collected</option>
                                     <option value="Not Collected">Sample Not Collected</option>
+                                    <option value="Sent to Shipping">Delivered to Shipping Site</option>
                                     <option value="On Transit">Sample on Transit</option>
                                     <option value="Delivered to NL">Delivered to NL</option>
                                     <option value="Cancelled/Damaged">Cancelled/Damaged</option>
