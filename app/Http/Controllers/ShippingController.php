@@ -275,7 +275,7 @@ class ShippingController extends Controller
         $relatedManifests = samples::where('shipping_manifest_id','=', $request->shipping_manifest_id);
 
         $relatedManifests->update([
-            'sample_status'=>'Delivered To NL Lab',
+            'sample_status'=>'Delivered To Sequence Lab',
             'updated_by'=>Auth::user()->id,
             'date_updated'=>date("Y-m-d")            
         ]);

@@ -32,7 +32,7 @@
                             </div>
                             <div class="input-field col m4">
                                 <input id="specimen_type" type="text" class="validate" name="specimen_type" value="{{$sample->specimen_type}}">
-                                <label for="specimen_type">Specimen Type</label>
+                                <label for="specimen_type">Specimen Source</label>
                             </div>
                             <div class="input-field col m4">
                                 <input id="sample_collection_date" type="text" class="datepicker" name="sample_collection_date"  value="{{$sample->sample_collection_date}}">
@@ -40,13 +40,10 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s4">
-                                <input id="laboratory_id" type="text" class="validate" name="laboratory_id" value="{{$sample->laboratory_id}}">
-                                <label for="laboratory_id">Laboratory ID</label>
-                            </div>
+                            
                             <div class="input-field col s4">
                                 <input id="specimen_id" type="text" class="validate" name="specimen_id" value="{{$sample->specimen_id}}">
-                                <label for="specimen_id">Specimen ID</label>
+                                <label for="specimen_id">Sample ID</label>
                             </div>
                             <div class="input-field col s4">
                               
@@ -97,64 +94,11 @@
                                 <label>Sample Collected By</label>
                             </div>
                             
-                            <div class="input-field col m6 s12">
-                                <textarea id="sample_signature" class="materialize-textarea" name="sample_signature">{{$sample->sample_signature}}</textarea>                         
-                                <label for="sample_signature" >Sample Signature</label>
-                            </div>
+                          
                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                    <input id="shipping_manifest_id" type="text" class="validate" name="shipping_manifest_id" value="{{$sample->shipping_manifest_id}}">
-                                    <label for="shipping_manifest_id">Shipping Manifest ID <small>This will be used during shipping</small></label>
-                            </div>
-                        </div>
+                     
 
-                        <div id="shipment">
-                            <div class="row">
-                                <div class="input-field col m6">
-                                    <input id="date_specimen_shipped" type="text" class="datepicker" name="date_specimen_shipped"  value="{{$sample->date_specimen_shipped}}">
-                                    <label for="date_specimen_shipped">Date of Speciment Shipment</label>
-                                </div>
-                                <div class="input-field col m6">
-                                    <input id="date_specimen_arrived_sequence_lab" type="text" class="datepicker" name="date_specimen_arrived_sequence_lab"  value="{{$sample->date_specimen_arrived_sequence_lab}}">
-                                    <label for="date_specimen_arrived_sequence_lab">Date Speciment Arrived Sequence Lab</label>
-                                </div>                                
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col m6">
-                                    <input id="receiving_lab_officer" type="text" class="validate" name="receiving_lab_officer" value="{{$sample->receiving_lab_officer}}">
-                                    <label for="receiving_lab_officer">Receiving Lab Officer</label>
-                                </div>
-                                <div class="input-field col m6">
-                                    <input id="receiving_lab_officer_phone" type="text" class="validate" name="receiving_lab_officer_phone" value="{{$sample->receiving_lab_officer_phone}}">
-                                    <label for="receiving_lab_officer_phone">Recieving Lab Officer Phone No</label>
-                                </div>                                
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col m6">
-                                    <input id="specimen_temperature_arrival" type="number" class="validate" name="specimen_temperature_arrival" value="{{$sample->specimen_temperature_arrival}}">
-                                    <label for="specimen_temperature_arrival">Specimen Temperature at Arrival (<sup>o</sup>C)</label>
-                                </div>
-                                <div class="input-field col m6">
-                                    <input id="receiving_lab_officer_remark" type="text" class="validate" name="receiving_lab_officer_remark" value="{{$sample->receiving_lab_officer_remark}}">
-                                    <label for="receiving_lab_officer_remark">Recieving Lab Officer Remark</label>
-                                </div>                                
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col m6">
-                                    <input id="quality_check" type="text" class="validate" name="quality_check" value="{{$sample->quality_check}}">
-                                    <label for="quality_check">Quality Check</label>
-                                </div>
-                                <div class="input-field col m6">
-                                    <input id="gridbox_number" type="text" class="validate" name="gridbox_number" value="{{$sample->gridbox_number}}">
-                                    <label for="gridbox_number">Gridbox Number</label>
-                                </div>                                
-                            </div>
-
-                        </div>
+                   
                         
 
 

@@ -48,15 +48,99 @@ class DrugResistanceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'sample_id' => 'required|min:3'
+            'specimen_id' => 'required|min:3'
         ]);
+
+
+        $uuid = bin2hex(random_bytes(6));
+
+        if($request->hasFile('fasta'))
+        {
+            $files = $request->file('fasta');
+
+            $fastafile = $files->getClientOriginalName();
+           
+        }else{
+            $fastafile = "";
+        }
+
+        if($request->hasFile('abi'))
+        {
+            $files = $request->file('abi');
+
+            $abifile = $files->getClientOriginalName();
+           
+        }else{
+            $abifile = "";
+        }
+
+
+        $result_id = specimen_results::create([
+            'sample_id'=>$request->specimen_id,
+            'specimen_result'=>$request->specimen_result,
+            'result_date'=>date("Y-m-d", strtotime($request->result_date)),
+            'processing_site_id'=>$request->processing_site_id,
+           // 'result_signatures'=>$request->result_signatures, 
+            'fasta_file_path'=>$fastafile,
+            'fasta_file_text'=>$request->fasta_file_text,
+            'abi_file_path'=>$abifile, 
+            'voided'=>0,
+            'voided_by'=>"",
+            'date_entered'=>date("Y-m-d"),
+            'updated_by'=>Auth::user()->id,
+            'uuid'=>$uuid,
+        ])->id;
+        
+        // Update Sample Info
+        $sample = samples::where('id','=', $request->id);
+        $sample->update([           
+            'sample_status'=>'Result Added'           
+        ]);
+
+        if($request->hasFile('fasta'))
+        {
+        $files = $request->file('fasta');
+
+                $filename = $files->getClientOriginalName();
+                
+                $files->move('uploads/'.$result_id, $filename.".txt");
+                
+        
+        }
+
+        if($request->hasFile('abi'))
+        {
+        $files = $request->file('abi');
+
+                $filename = $files->getClientOriginalName();
+                
+                $files->move('uploads/'.$result_id, $filename.".txt");
+                
+
+        
+        }
+
+        $i = 0;
+        if(isset($request->property)){
+            foreach ($request->property as $pp){
+            // RECORD SPECS
+            
+                sresults::create([
+                    'obs'=>$pp,
+                    'value'=>$request->value[$i],
+                    'result_id'=>$result_id                
+                    ]);
+                    $i++;
+            }
+        }
+        // END RESULT
 
         
         
         foreach($request->drug_name as $key => $drug_name){
             $uuid = bin2hex(random_bytes(6));        
             drug_resistance::create([
-                'result_id'=>$request->result_id,
+                'result_id'=>$result_id,
                 'drug_name'=>$drug_name,
                 // 'result_date'=>date("Y-m-d", strtotime($request->result_date)),
                 'gene_mutation'=>$request->gene_mutation[$key],
@@ -75,11 +159,11 @@ class DrugResistanceController extends Controller
         }
 
         audit::create([
-            'action'=>"Created New Drug Resistance for Result ID: ".$request->result_id,
+            'action'=>"Created New Drug Resistance for Result ID: ".$result_id,
             'description'=>'A new Drug Resistance was created',
             'doneby'=>Auth::user()->id          
         ]);
-        session()->flash('message','The New Drug Resistance for Result ID: '.$request->result_id.' has been added successfully!');
+        session()->flash('message','The New Drug Resistance for Result ID: '.$result_id.' has been added successfully!');
         
         return redirect()->back();
     }

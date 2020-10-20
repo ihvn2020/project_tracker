@@ -28,8 +28,8 @@ class SamplesController extends Controller
     }
 
     public function nl_samples(){
-        $samples = samples::orderBy('sample_id', 'asc')->where('voided','!=',1)->where('sample_status','Delivered To Shipping Site')->paginate(50);
-        $all_samples = samples::select('sample_id','patient_id', 'specimen_id')->where('voided','!=',1)->where('sample_status','Delivered To Shipping Site')->get();
+        $samples = samples::orderBy('sample_id', 'asc')->where('voided','!=',1)->paginate(50);
+        $all_samples = samples::select('sample_id','patient_id', 'specimen_id')->where('voided','!=',1)->where('sample_status','Delivered To Shipping Site')->where('sample_status','Delivered To Sequence Lab')->get();
         return view('nl_samples',compact('samples'), ['all_samples'=>$all_samples]);
     }
     /**
@@ -57,9 +57,20 @@ class SamplesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'patient_id' => 'required|min:3'
+            'specimen_id' => 'required|min:3'
         ]);
         
+
+        $patient_id = "HOSPNo".substr(md5(uniqid(mt_rand(), true).microtime(true)),0, 8); 
+
+        patients::create([
+            'patient_id'=>$patient_id,
+            'birthdate'=>$request->birthdate,
+            'gender'=>$request->gender,
+            'hosp_id'=>$request->hosp_id,
+            'other_id'=>$request->other_id,           
+        ]);
+
 
         $sample_id = "SNo".substr(md5(uniqid(mt_rand(), true).microtime(true)),0, 8); 
         $uuid = bin2hex(random_bytes(6));
@@ -81,8 +92,8 @@ class SamplesController extends Controller
             'specimen_id'=>$request->specimen_id,
             'collection_site_id'=>$request->collection_site_id, 
             'remark'=>$request->remark,
-            'sample_status'=>$request->sample_status,
-            'collected_by'=>$request->collected_by,
+            'sample_status'=>'Collected at NRL',
+            'collected_by'=>Auth::user()->id,
             // 'sample_signature'=>$request->sample_signature,
             'date_specimen_shipped'=>"",
             'date_specimen_arrived_sequence_lab'=>"",
@@ -266,7 +277,8 @@ class SamplesController extends Controller
             foreach ($request->id as $key => $id) {
                 $sample = samples::where('id','=', $id);
                 $sample->update([
-                    'shipping_manifest_id'=>$manifest_id
+                    'shipping_manifest_id'=>$manifest_id,
+                    'sample_status'=>'Manifest Created'
                 ]);
 
             }

@@ -67,7 +67,7 @@
                     <td>
                                                  
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="sel{{$sat->id}}"  onclick="addtoManifest({{$sat->id}},{{$sat->specimen_id}},{{$sat->id}})">
+                            <input class="form-check-input" type="checkbox" id="sel{{$sat->id}}"  onclick="addtoManifest('{{$sat->id}}','{{$sat->specimen_id}}','{{$sat->id}}')">
 
                             <label class="form-check-label" for="sel{{$sat->id}}">
                               

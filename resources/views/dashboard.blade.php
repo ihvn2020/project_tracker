@@ -23,7 +23,7 @@
     <main>
         <div class="row">
             <div class="text-center" style="text-align: center; margin-top: 10px;">
-                <a href="/add_patient" class="btn btn-small pulse blue darken-2"><i class="material-icons">add</i> Add New Sample</a>
+                <a href="/add_sample" class="btn btn-small pulse blue darken-2"><i class="material-icons">add</i> Add New Sample</a>
                 <a href="/samples" class="btn btn-small pulse blue darken-3"><i class="material-icons">list</i> All Samples</a>
 
             </div>

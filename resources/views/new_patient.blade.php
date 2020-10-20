@@ -9,20 +9,7 @@
                 
                     <form method="POST" action="{{ route('patients.store') }}">
                         @csrf
-                        <div class="row">
-                            <div class="input-field col m4">
-                                <input id="first_name" type="text" class="validate" name="first_name" required>
-                                <label for="first_name">First Name</label>
-                            </div>
-                            <div class="input-field col m4">
-                                <input id="last_name" type="text" class="validate" name="last_name" required>
-                                <label for="last_name">Last Name</label>
-                            </div>
-                            <div class="input-field col m4">
-                                <input id="other_names" type="text" class="validate" name="other_names">
-                                <label for="other_names">Other Names</label>
-                            </div>
-                        </div>
+                        
                         <div class="row">
                             <div class="input-field col s6">
                                 <input id="birthdate" type="date" class="datepicker" name="birthdate">
@@ -48,31 +35,16 @@
                                 <label for="other_id">Other ID</label>
                             </div>
                         </div>
-                        <h6>Contact Info</h6>
-                       <div class="row">
-                            <div class="input-field col m6 s12">
-                                    <input id="email" type="email" class="validate" name="email">
-                                    <label for="email">Email Address</label>
-                            </div>
-
-                            <div class="input-field col m6 s12">
-                                    <input id="phone_no" type="text" class="validate" name="phone_no">
-                                    <label for="phone_no">Phone Number</label>
-                            </div>
-                       </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                    <input id="remarks" type="text" class="validate" name="remarks">
-                                    <label for="remarks">Remarks/Status</label>
-                            </div>
-                        </div>
+                        
+                        
+                        
                         
 
 
                         <div class="input-field text-right right" style="margin-bottom:20px;">
                             
                                 <button type="submit" class="btn">
-                                    Continue
+                                    Save
                                 </button>                               
                         
                         </div>

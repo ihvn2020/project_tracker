@@ -65,8 +65,7 @@
                     <td>{{$sat->shipping_manifest_id}}</td>             
                     
                     <td> 
-                      <a href="{{url('add_results/'.$sat->id)}}" class="btn btn-small waves-effect btn blue darken-5 waves-light tooltipped" data-position="top" data-tooltip="Add Results"><i class="material-icons" >check</i> Add Result</a>          
-                               
+                      <a href="{{url('add_results/'.$sat->id)}}" class="btn btn-small waves-effect btn blue darken-5 waves-light tooltipped" data-position="top" data-tooltip="Add Results">Result</a>               
                     </td>
                 </tr>
                 @endforeach

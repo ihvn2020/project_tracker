@@ -217,15 +217,12 @@
           <h6>Links</h6>
           <ul>
             <li><a href="/" class="grey-text text-lighten-3">Dashboard</a></li>
-            <li><a href="/inventories" class="grey-text text-lighten-3">Records</a></li>
-            <li><a href="/manage_users" class="grey-text text-lighten-3">Users</a></li>
           </ul>
         </div>
         <div class="col l2 s6">
           <h6>System Managment</h6>
           <ul>
             <li><a href="/help" class="grey-text text-lighten-3">Help</a></li>
-            <li><a href="/edit_settings" class="grey-text text-lighten-3">Settings</a></li>
             <li><a href="/help" class="grey-text text-lighten-3">Support</a></li>
           </ul>
         </div>
