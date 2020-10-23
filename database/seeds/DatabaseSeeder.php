@@ -37,12 +37,12 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         
         DB::table('settings')->insert([
-            'organization_name' => 'TB, Nigeria',
+            'organization_name' => 'CDC/IHVN, Nigeria',
             'description' => '...tb sampling, sequencing, reporting and tb data management',
             'logo' => 'resthubLogo.jpg',
             'address' => 'Central Business District, Abuja',
             'phone_number' => '2348012345678',
-            'copyright' => 'TB 2020 '.date("Y").'&copy; All Rights Reserved',
+            'copyright' => 'RESTHub Manager 2020 '.date("Y").'&copy; All Rights Reserved',
         ]);       
 
     }

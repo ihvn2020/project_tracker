@@ -77,8 +77,9 @@ class ShippingController extends Controller
             /*
             'receiving_lab_officer_name'=>$request->receiving_lab_officer_name,
             'receiving_lab_officer_phone'=>$request->receiving_lab_officer_phone,
-            'manifest_status'=>$request->manifest_status,
+            
             */
+            'manifest_status'=>$request->manifest_status,
             'voided'=>0,
             'date_voided'=>"",
             'voided_by'=>"",
@@ -169,8 +170,9 @@ class ShippingController extends Controller
             /*
             'receiving_lab_officer_name'=>$request->receiving_lab_officer_name,
             'receiving_lab_officer_phone'=>$request->receiving_lab_officer_phone,
-            'manifest_status'=>$request->manifest_status,
+            
             */
+            'manifest_status'=>$request->manifest_status,
             'voided'=>0,
             'date_voided'=>"",
             'voided_by'=>"",

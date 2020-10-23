@@ -83,10 +83,8 @@
                         <select name="site_type" id="site_type" class="validate">
                             <option value="Shipping Site">Shipping Site</option>
                             <option value="Sample Collection Site">Sample Collection Site</option>
-                            <option value="Sample Delivery Site">Sample Delivery Site</option>
-                            <option value="Patients Registration Site">Patients Registration  Site</option>
-                            <option value="NRL Site">NRL Site</option>
-                            <option value="NL Site">NL Site</option>
+                            <option value="NRL Site">National Reference Lab</option>
+                            <option value="SL Site">Sequencing Lab</option>
                             <option value="Others">Others</option>
                         </select>
                         <label for="site_type">Select Site Type</label>

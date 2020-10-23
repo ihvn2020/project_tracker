@@ -144,6 +144,37 @@
         <li class="white"><a class="waves-effect waves-blue" href="/reports"><i class="material-icons">swap_horiz</i>Activity Report</a></li>                  
         <li class="white"><div class="divider"></div></li>
       @endif
+      @if (auth()->user()->role=="SL")
+        <li class="white">
+          <ul class="collapsible collapsible-accordion">
+            
+                <li>
+                  <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">list</i>Samples Management<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                  <div class="collapsible-body">
+                    <ul>
+                      <li><a class="waves-effect waves-blue" href="/nl_samples"><i class="material-icons">fullscreen</i>View All<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
+                      <li><a class="waves-effect waves-blue" href="/sample_results"><i class="material-icons">fullscreen</i>Sample Results<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
+                    </ul>
+                  </div>
+                </li>
+          </ul>
+        </li>
+        
+        <li class="white">
+          <ul class="collapsible collapsible-accordion">
+            
+                <li>
+                  <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">list</i>Manifests and Shipping<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                  <div class="collapsible-body">
+                    <ul>
+                      <li><a class="waves-effect waves-blue" href="/shippings"><i class="material-icons">fullscreen</i>View All<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
+                    </ul>
+                  </div>
+                </li>
+          </ul>
+        </li>
+      @endif
+
         <li class="white"><a href="/edit_settings/1"><i class="material-icons">settings</i>Settings</a></li>
         <li class="white"><a href="/help"><i class="material-icons">help</i>Help</a></li>
         <li class="green">  
@@ -287,7 +318,7 @@
           type: 'column'
           },
           title: {
-          text: 'Samples and Patients Distribution Accross Facilities'
+          text: 'Samples and DNA Extraction Distribution Across NRL Labs'
           },
           xAxis: {
           categories: ['FCT','Nasarawa','Katsina','Rivers']

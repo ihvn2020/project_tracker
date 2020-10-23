@@ -38,6 +38,9 @@ class CreateSamplesTable extends Migration
             $table->string('receiving_lab_officer_remark')->nullable();
             $table->string('quality_check')->nullable();
             $table->string('gridbox_number')->nullable();
+            $table->string('nrl_arrival_date')->nullable();
+            $table->string('dna_extracted')->nullable();
+            $table->string('dna_extraction_date')->nullable();
             $table->string('voided')->nullable();
             $table->string('date_voided')->nullable();
             $table->string('voided_by')->nullable();

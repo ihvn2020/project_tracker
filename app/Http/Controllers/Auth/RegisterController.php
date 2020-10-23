@@ -73,7 +73,8 @@ class RegisterController extends Controller
             'unit' => $data['unit'],
             'department' => $data['department'],
             'facility' => $data['facility'],
-            'role' => $data['role']
+            'role' => $data['role'],
+            'site_name' => $data['site_name']
             
         ]);
     }

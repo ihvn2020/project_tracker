@@ -28,10 +28,25 @@ class SamplesController extends Controller
     }
 
     public function nl_samples(){
-        $samples = samples::orderBy('sample_id', 'asc')->where('voided','!=',1)->paginate(50);
-        $all_samples = samples::select('sample_id','patient_id', 'specimen_id')->where('voided','!=',1)->where('sample_status','Delivered To Shipping Site')->where('sample_status','Delivered To Sequence Lab')->get();
+        $samples = samples::orderBy('sample_id', 'asc')->where([['voided','!=',1],['sample_status','=','Delivered To Shipping Site']])->paginate(50);
+        $all_samples = samples::select('sample_id','patient_id', 'specimen_id')->where([['voided','!=',1],['sample_status','=','Delivered To Shipping Site']])->get();
         return view('nl_samples',compact('samples'), ['all_samples'=>$all_samples]);
     }
+
+    public function sample_results(){
+        $samples = samples::orderBy('sample_id', 'asc')->where([['voided','!=',1],['sample_status','=','Result Added']])->paginate(50);
+        $all_samples = samples::select('sample_id','patient_id', 'specimen_id')->where([['voided','!=',1],['sample_status','=','Result Added']])->get();
+        $results = specimen_results::select('id', 'sample_id')->where('voided','!=',1)->get();
+
+        return view('sample_results',compact('samples'), ['all_samples'=>$all_samples,'results'=>$results]);
+    }
+
+    public function print_manifest(Request $request){
+        $manifest_id = $request->shipping_manifest_id;
+        $samples = samples::orderBy('sample_id', 'asc')->where('shipping_manifest_id','=',$manifest_id)->get();
+        return view('sample_print',compact('samples'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -103,6 +118,9 @@ class SamplesController extends Controller
             'receiving_lab_officer_remark'=>"",
             'quality_check'=>$request->quality_check,
             'gridbox_number'=>$request->gridbox_number,
+            'nrl_arrival_date'=>$request->nrl_arrival_date,
+            'dna_extracted'=>$request->dna_extracted,
+            'dna_extraction_date'=>$request->dna_extraction_date,
             'voided'=>0,
             'date_voided'=>"",
             'voided_by'=>"",

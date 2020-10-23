@@ -61,6 +61,7 @@
                   <div class="collapsible-body">
                     <ul>
                       <li><a class="waves-effect waves-blue" href="/nl_samples"><i class="material-icons">fullscreen</i>View All<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
+                      <li><a class="waves-effect waves-blue" href="/sample_results"><i class="material-icons">fullscreen</i>Sample Results<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
                     </ul>
                   </div>
                 </li>

@@ -89,14 +89,26 @@
                         <div class="input-field">
                             <select name="role" id="role">
                                 <option value="role" selected>User Role</option>
-                                <option value="Admin">Admin</option>
-                                <option value="Manager">Manager</option>
+                                <option value="Admin">System Admin</option>
                                 <option value="User">User</option>
-                                <option value="SC">Sample Collection</option>
-                                <option value="NL">Sequence Lab</option>
-                                <option value="Doctor">Doctor</option>
+                                <option value="NRL">National Reference Lab User</option>
+                                <option value="SL">TB Sequencing Lab User</option>
                             </select>
                             <label for="role">Select Role</label>
+                        </div>
+
+                        <div class="input-field">
+                            <select name="site_name" id="site_name" materialize="material_select">
+                                <option value="site_name" selected>User Site</option>
+                                @php
+                                $sites = \App\sites::select('id','site_name')->get();
+                               @endphp
+
+                                @foreach ($sites as $sites)                                            
+                                <option value="{{$sites->id}}">{{$sites->site_name}}</option>
+                                @endforeach
+                            </select>
+                            <label for="site_name">Select User Site</label>
                         </div>
 
                         <div class="input-field">

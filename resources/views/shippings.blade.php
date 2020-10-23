@@ -34,7 +34,7 @@
             <thead class="thead-dark">
                 <tr>                    
                     <th>Manifest ID</th>
-                    <th>Site ID</th>
+                    <th>Shipping Site ID</th>
                     <th>Shipping Date</th>
                     <th>Shipping Site Contacts</th>                   
                     <th>Tubes</th>
@@ -61,7 +61,7 @@
                     </td>
                     <td>{{$sh->number_of_cryovial_tubes}}</td>
                     <td>{{$sh->tracking_waybill_number}}</td>
-                    <th>{{$sh->processing_site_id}}</th>
+                    <td>{{\App\sites::where('id',$sh->processing_site_id)->first()->site_name}}</td>
                     <td style="font-size: 0.8em !important;">
                         <strong>R.L.O.N:</strong> {{$sh->shipping_site_contact_person}}<br>
                         <strong>R.L.O.Ph:</strong> {{$sh->shipping_laboratory_phone}}
@@ -96,8 +96,7 @@
                                     <i class="small material-icons">menu</i>
                                 </a>
                                 <ul style="top: 0px !important">
-                                    
-                                    
+                                    @if (auth()->user()->role!="SL")   
                                     <li>
                                             <form method="POST" action="{{route('shippings.destroy',$sh->id)}}">
                                                 @csrf
@@ -110,11 +109,20 @@
                                     <li>
                                             <a href="/shipping/{{$sh->id}}" class="btn-floating btn-small waves-effect btn blue darken-5 waves-light tooltipped" data-position="top" data-tooltip="View/Update this Shipping info"><i class="material-icons" >edit</i></a>          
                                     </li>
+                                    @endif 
 
                                       
                                     <li>
                                             <a href="/manifestconfirm/{{$sh->id}}" class="btn-floating btn-small waves-effect btn blue darken-5 waves-light tooltipped" data-position="top" data-tooltip="Add Manifest Reception and Confirmation"><i class="material-icons" >add</i></a>          
                                     </li>
+
+                                    <li>
+                                        <form method="POST" action="{{route('print_manifest')}}">
+                                            @csrf
+                                            <input type="hidden" name="shipping_manifest_id" value="{{$sh->shipping_manifest_id}}">
+                                        <button class="btn-floating btn-small waves-effect green waves-light tooltipped" data-position="top" data-tooltip="This this Manifest"><i class="material-icons">print</i></button>
+                                        </form>
+                                </li>
 
                                 </ul>
                         </div>

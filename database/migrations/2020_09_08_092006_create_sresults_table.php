@@ -18,15 +18,15 @@ class CreateSresultsTable extends Migration
             $table->string('obs');
             $table->string('value');
             $table->timestamps();
-            $table->unsignedBigInteger('result_id')->unique();
+            $table->unsignedBigInteger('result_id');
         });
 
-        /*
+        
         Schema::table('sresults', function (Blueprint $table) {
             
-            // $table->foreign('result_id')->references('id')->on('specimen_results')->onDelete('cascade');
+            $table->foreign('result_id')->references('id')->on('specimen_results')->onDelete('cascade');
         });
-        */
+        
     }
 
     /**

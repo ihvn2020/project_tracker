@@ -3,12 +3,12 @@
 @section('content')
     
     <div class = "row" style="width:98%; margin:auto;">
-        <h5 class="text-center">List of Queued Samples</h5>
+        <h5 class="text-center">Samples with Result</h5>
     <form action="product_search" method="post">
         @csrf
         <div class="input-field col m6 offset-m2">
             <select name="keyword" id="keyword" class="browser-default" style="width: 100% !important;">
-                    <option value="-" selected>Search All Samples Here</option>
+                    <option value="-" selected>Search All Samples with Result Here</option>
                     @foreach ($all_samples as $sa)                  
                     
                         <option value="{{$sa->id}}">{{$sa->sample_id}} - {{$sa->shipping_manifest_id}}</option>                                                 
@@ -31,7 +31,7 @@
                     <th>Site ID</th>
                     <th>Sample Status</th>
                     <th>Manifest ID</th>
-                    <th>Add Result</th>
+                    <th>Edit Result</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,7 +76,7 @@
                     <th>Site ID</th>
                     <th>Sample Status</th>
                     <th>Manifest ID</th>
-                    <th>Action</th>
+                    <th>Edit</th>
                 </tr>
             </tfoot>
         </table>

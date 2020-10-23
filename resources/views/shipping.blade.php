@@ -108,8 +108,11 @@
                             </div>
                         -->
                        <div class="input-field col m6 s12">
-                                <input id="manifest_status" type="text" class="validate" name="manifest_status" value="{{$shipping->manifest_status}}">
-                                <label for="manifest_status">Manifest Status</label>
+                                <select name="manifest_status" id="manifest_status">
+                                    <option value="Delivered To Shipping Site">Delivered To Shipping Site</option>
+                                    <option value="Not Delivered To Shipping Site">Not Delivered To Shipping Site</option>                                    
+                                </select>
+                                <label for="manifest_status">Shipping Status</label>
                         </div>
 
                         <div class="input-field text-right right" style="margin-bottom:20px;">

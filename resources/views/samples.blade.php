@@ -109,19 +109,7 @@
                 </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>Sample ID</th>
-                    <th>Patient ID</th>
-                    <th>Specimen ID</th>
-                    <th>Speciment Type</th>                   
-                    <th>Lab ID</th>
-                    <th>Site ID</th>
-                    <th>Sample Status</th>
-                    <th>Manifest ID</th>
-                    <th>Action</th>
-                </tr>
-            </tfoot>
+            
         </table>
         <div class="col m6 offset-m3">{{$samples->links()}}</div>
         @else

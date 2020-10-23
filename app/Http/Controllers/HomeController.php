@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\inventory;
+use App\audit;
 use DB;
 
 class HomeController extends Controller
@@ -34,7 +35,7 @@ class HomeController extends Controller
                  ->get();
         */
 
-        if(auth()->user()->role=="NL"){
+        if(auth()->user()->role=="SL"){
             return redirect('nl_samples');
         }else{
             $computercount = inventory ::select(DB::raw("count(*) as count"))
@@ -53,7 +54,10 @@ class HomeController extends Controller
 
             $furnitures = array_column($furniturecount, 'count');
 
+            $audits = audit::orderBy('created_at', 'desc')->paginate(10);
+        
             return view('dashboard')
+            ->with('audits',$audits)
             ->with('computers',json_encode($computers,JSON_NUMERIC_CHECK))
             ->with('furnitures',json_encode($furnitures,JSON_NUMERIC_CHECK));
         }
@@ -62,7 +66,7 @@ class HomeController extends Controller
 
     public function user_dashboard()
     {
-        if(auth()->user()->role=="NL"){
+        if(auth()->user()->role=="SL"){
             return route('nl_samples');
         }else{
 

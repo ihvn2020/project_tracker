@@ -92,7 +92,7 @@ class DrugResistanceController extends Controller
         ])->id;
         
         // Update Sample Info
-        $sample = samples::where('id','=', $request->id);
+        $sample = samples::where('specimen_id','=', $request->specimen_id);
         $sample->update([           
             'sample_status'=>'Result Added'           
         ]);
@@ -133,9 +133,7 @@ class DrugResistanceController extends Controller
                     $i++;
             }
         }
-        // END RESULT
-
-        
+        // END RESULT        
         
         foreach($request->drug_name as $key => $drug_name){
             $uuid = bin2hex(random_bytes(6));        

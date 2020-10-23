@@ -24,15 +24,15 @@
                                     <label for="gender">Select Gender</label>
                             </div>
                         </div>
-                        <h6>Hospital Info</h6>
+                        <h6>Location the Sample Was Taken From:</h6>
                         <div class="row">
                             <div class="input-field col s6 ">
                                 <input id="hosp_id" type="text" class="validate" name="hosp_id">
-                                <label for="hosp_id">Hospital/Facility ID</label>
+                                <label for="hosp_id">Facility ID</label>
                             </div>
                             <div class="input-field col s6 ">
                                 <input id="other_id" type="text" class="validate" name="other_id">
-                                <label for="other_id">Other ID</label>
+                                <label for="other_id">Other ID <small>e.g. Patient Hosp. No. etc</small></label>
                             </div>
                         </div>
 
@@ -63,20 +63,34 @@
                                 <label for="sample_collection_date">Sample Collection Date</label>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="input-field col m4">
+                                <input id="nrl_arrival_date" type="text" class="datepicker" name="nrl_arrival_date">
+                                <label for="nrl_arrival_date">Date Sample Arrived NRL</label>
+                            </div>
+                            <div class="input-field col m4">
+                                <input id="dna_extracted" type="checkbox" name="dna_extracted">
+                                <label for="dna_extracted">Sample DNA Extracted?</label>
+                            </div>
+                            <div class="input-field col m4">
+                                <input id="dna_extraction_date" type="text" class="datepicker" name="dna_extraction_date">
+                                <label for="dna_extraction_date">DNA Extraction Date</label>
+                            </div>
+                        </div>
                         
                        
                         
                         <div class="row">
                             <div class="input-field col s6">
                                 <select name="collection_site_id" id="collection_site_id">
-                                <option value="{{auth()->user()->facility}}" selected>{{auth()->user()->facility}}</option>
+                                <option value="{{auth()->user()->site_name}}" selected>{{auth()->user()->site_name}}</option>
                                    @if (isset($sites))
                                         @foreach ($sites as $p)                                         
-                                            <option value="{{$p->id}}" selected="selected">{{$p->site_name.' - '.$p->id}}</option>
+                                            <option value="{{$p->id}}">{{$p->site_name.' - '.$p->id}}</option>
                                         @endforeach
                                     @endif
                                 </select>
-                                <label for="collection_site_id">Collection Site</label>
+                                <label for="collection_site_id">NRL Collection Site</label>
                             </div>     
                     
                             <div class="input-field col s6 ">
