@@ -12,11 +12,11 @@
                     @csrf
 
                     <div class="row">
-                        <div class="input-field col m6">
+                        <div class="input-field col m4">
                             <select name="specimen_id" id="specimen_id">
                                 @if (isset($samples))
                                      @foreach ($samples as $s)                                         
-                                         <option value="{{$s->specimen_id}}" selected="selected">{{$s->specimen_id.' - '.$s->patient_id}}</option>
+                                         <option value="{{$s->specimen_id}}" selected="selected">{{$s->specimen_id}}</option>
                                      @endforeach
                                  @endif
                              </select>
@@ -33,8 +33,9 @@
                              </select>
                              <label for="processing_site_id">Processing Site</label>
                         </div>
+
                       
-                        <div class="input-field col m2">
+                        <div class="input-field col m4">
                             <input id="result_date" type="text" class="datepicker" name="result_date">
                             <label for="result_date">Result Date</label>
                         </div>
@@ -90,10 +91,11 @@
                                 <div class="input-field col m4">
                                     <input id="drug_name" list="drug_names" class="browser-default" name="drug_name[]">
                                     <datalist id="drug_names">
-                                        <option value="Isoniazid">
-                                        <option value="Rifampicin">
-                                        <option value="Rifampicin">
-                                        <option value="Ethambutol">
+                                        <option value="KAT G/Isoniazid">
+                                        <option value="RPOB gene/Rifampicin">
+                                        <option value="RV0678/Clofazimine">
+                                        <option value="GYRA/Floroquinolones">
+                                        <option value="RRS/Aminoglycoside/Injectibles">
                                     </datalist>
                                     <label for="drug_name" class="active">Drug Name</label>
                                 </div>
@@ -122,10 +124,13 @@
                             </div>
                         </div>
                     
-                        
                         <div class="row">
                             <div class="input-field col s6">
-                                    <textarea id="interpretation" class="materialize-textarea" name="interpretation[]"></textarea>                         
+                                    <select name="interpretation" id="interpretation">
+                                        <option value="R">Resistant</option>   
+                                        <option value="S">Susceptible</option> 
+                                        <option value="I">Indeterminate</option>
+                                    </select>                    
                                     <label for="interpretation" >Interpretation</label>
                             </div>
                             <div class="input-field col s6">

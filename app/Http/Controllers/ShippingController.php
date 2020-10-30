@@ -278,6 +278,7 @@ class ShippingController extends Controller
 
         $relatedManifests->update([
             'sample_status'=>'Delivered To Sequence Lab',
+            'date_specimen_arrived_sequence_lab'=>$request->arrival_date,
             'updated_by'=>Auth::user()->id,
             'date_updated'=>date("Y-m-d")            
         ]);

@@ -7,7 +7,7 @@
     <div class="row">
         <div class="card col m8 offset-m2" style="margin-top:20px;">
             
-                <h3 class="card-header text-center" style="text-align:center;">Update Sample/Shipping</h3>
+                <h3 class="card-header text-center" style="text-align:center;">Update Sample</h3>
                 
 
                 
@@ -16,38 +16,56 @@
                         <input name="_method" type="hidden" value="PUT">
                         <input type="hidden" name="sample_id" value="{{$sample->sample_id}}">
                         <input type="hidden" name="id" value="{{$sample->id}}">
+                        <input type="hidden" name="pid" value="{{$sample->patients->patient_id}}">
 
                         <div class="row">
-                            <div class="input-field col m4">
+                            <div class="input-field col m3">
                                 <select name="patient_id" id="patient_id">
-                                    @if (isset($patient_id))                                        
-                                        <option value="{{$patient_id}}" selected>{{$patient_name}} ({{$patient_id}})</option>
-                                    @else
-                                        @foreach ($patients as $p)                                         
-                                            <option value="{{$p->patient_id}}" selected="selected">{{$p->first_name.' '.$p->last_name.' - '.$p->patient_id}}</option>
-                                        @endforeach
-                                    @endif
+                                                                          
+                                        <option value="{{$sample->patient_id}}" selected>{{$sample->patients->patient_name}} ({{$sample->patient_id}})</option>                        
                                 </select>
                                 <label for="patient_id">Patient ID</label>
                             </div>
-                            <div class="input-field col m4">
-                                <input id="specimen_type" type="text" class="validate" name="specimen_type" value="{{$sample->specimen_type}}">
-                                <label for="specimen_type">Specimen Source</label>
+                            <div class="input-field col s3">
+                            <input id="birthdate" type="date" class="datepicker" name="birthdate" value="{{$sample->patients->birthdate}}">
+                                <label for="birthdate">Date of Birth</label>
                             </div>
-                            <div class="input-field col m4">
-                                <input id="sample_collection_date" type="text" class="datepicker" name="sample_collection_date"  value="{{$sample->sample_collection_date}}">
-                                <label for="sample_collection_date">Sample Collection Date</label>
+                            <div class="input-field col s1">
+                                <h5>OR</h5>
+                            </div>
+                            <div class="input-field col s2">
+                                <input id="age" type="number" class="validate" name="age" value="{{$sample->patients->age}}">
+                                <label for="age">Age</label>
+                            </div>
+                            
+                            <div class="input-field col s3">
+                                    <select name="gender" id="gender">
+                                        <option  value="{{$sample->patients->gender}}" selected>{{$sample->patients->gender}}</option>
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
+                                    </select>
+                                    <label for="gender">Select Gender</label>
                             </div>
                         </div>
+                        <h6>Location the Sample Was Taken From:</h6>
                         <div class="row">
-                            
+                            <div class="input-field col s4 ">
+                                <input id="hosp_id" type="text" class="validate" name="hosp_id"  value="{{$sample->patients->hosp_id}}">
+                                <label for="hosp_id">Location Name/Facility ID<small> e.g. state, facility name</label>
+                            </div>
+                            <div class="input-field col s4 ">
+                                <input id="other_id" type="text" class="validate" name="other_id" value="{{$sample->patients->other_id}}">
+                                <label for="other_id">Any Other ID <small>e.g. Patient Hosp. No. etc</small></label>
+                            </div>
                             <div class="input-field col s4">
                                 <input id="specimen_id" type="text" class="validate" name="specimen_id" value="{{$sample->specimen_id}}">
                                 <label for="specimen_id">Sample ID</label>
                             </div>
-                            <div class="input-field col s4">
-                              
-                                
+                        </div>
+
+                        <div class="row">
+                            
+                            <div class="input-field col s3">
                                     <select name="collection_site_id" id="collection_site_id">
                                         <option value="{{$sample->collection_site_id}}" selected="selected">{{$sample->collection_site_id}}</option>
 
@@ -58,18 +76,51 @@
                                         @endif
                                     </select>
                                     <label for="collection_site_id">Collection Site</label>
-                                  
-                            </div>                           
+                            </div> 
                             
+                            <div class="input-field col m3">
+                                <input id="specimen_type" type="text" class="validate" name="specimen_type" value="{{$sample->specimen_type}}">
+                                <label for="specimen_type">Specimen Source</label>
+                            </div>
+                            <div class="input-field col m3">
+                                <input id="sample_collection_date" type="text" class="datepicker" name="sample_collection_date"  value="{{$sample->sample_collection_date}}">
+                                <label for="sample_collection_date">Sample Collection Date</label>
+                            </div>
+
+                            <div class="input-field col m3">
+                                <select name="result_type" id="result_type">
+                                    <option value="MDR">MDR</option>
+                                    <option value="PreXDR">PreXDR</option>
+                                    <option value="XDR" selected>XDR</option>
+                                   
+                                </select>
+                                    <label for="result_type">Result Type</label>
+    
+                            </div>
+                        </div>
+                       
+                        <div class="row">
+                            <div class="input-field col m4">
+                                <input id="nrl_arrival_date" type="text" class="datepicker" name="nrl_arrival_date" value="{{$sample->nrl_arrival_date}}">
+                                <label for="nrl_arrival_date">Date Sample Arrived NRL</label>
+                            </div>
+                            <div class="input-field col m4">
+                                <input id="dna_extracted" type="checkbox" name="dna_extracted" @if($sample->dna_extracted) checked @endif>
+                                <label for="dna_extracted">Sample DNA Extracted?</label>
+                            </div>
+                            <div class="input-field col m4">
+                                <input id="dna_extraction_date" type="text" class="datepicker" name="dna_extraction_date" value="{{$sample->dna_extraction_date}}">
+                                <label for="dna_extraction_date">DNA Extraction Date</label>
+                            </div>
                         </div>
                        
                         
                         <div class="row">
-                            <div class="input-field col s6 ">
+                            <div class="input-field col s6">
                                 <input id="remark" type="text" class="validate" name="remark"  value="{{$sample->remark}}">
                                 <label for="remark">Remark</label>
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s4">
                                     <select name="sample_status" id="sample_status">
                                         <option value="{{$sample->sample_status}}" selected>{{$sample->sample_status}}</option>
                                         <option value="Collected" selected="selected">Sample Collected</option>
@@ -80,32 +131,21 @@
                                     </select>
                                     <label for="sample_status">Sample Status</label>
                             </div>
-                            
-                        </div>
-                        
-                       <div class="row">
-                            <div class="input-field col m6 s12">
+                            <div class="input-field col s2">
                                 <select name="collected_by" id="collected_by">                                                                        
                                         <option value="{{$sample->collected_by}}">{{$sample->collected_by}}</option>                                    
                                         @foreach ($users as $user)                                            
                                             <option value='{{$user->id}}'>{{$user->name}}</option>
                                         @endforeach
                                 </select>
-                                <label>Sample Collected By</label>
-                            </div>
-                            
-                          
-                       </div>
-                     
-
-                   
+                                <label>Recorded By</label>
+                            </div>  
+                        </div>
                         
-
-
-                        <div class="input-field text-right right" style="margin-bottom:20px;">
-                            
+                       
+                        <div class="input-field text-right right" style="margin-bottom:20px;">                            
                                 <button type="submit" class="btn">
-                                    Update Sample/Shipment
+                                    Update Sample
                                 </button>                               
                         
                         </div>

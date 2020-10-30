@@ -22,16 +22,15 @@
     </form>
         @if ($samples!=NULL)
           <div>
-              <a href="/add_patient" class="btn btn-small btn-floating right pulse btn blue darken-5"><i class="material-icons">add</i></a>
+              <a href="/add_sample" class="btn btn-small btn-floating right pulse btn blue darken-5"><i class="material-icons">add</i></a>
           </div>
         <table id="products" class="display print_table responsive-table" style="width:100%;;">
             <thead class="thead-dark">
                 <tr>                    
+                    <th>Resthub ID</th>
                     <th>Sample ID</th>
-                    <th>Patient ID</th>
-                    <th>Specimen ID</th>
                     <th>Speciment Type</th>                   
-                    <th>Lab ID</th>
+                    <th>DNA Extracted</th>
                     <th>Site ID</th>
                     <th>Sample Status</th>
                     <th>Manifest ID</th>
@@ -43,10 +42,10 @@
                 
                 <tr>
                     <td>({{$sat->id}}) {{$sat->sample_id}}</td>
-                    <td>{{$sat->patient_id}}</td>
+                    
                     <td>{{$sat->specimen_id}}</td>
                     <td>{{$sat->specimen_type}}</td>
-                    <td>{{$sat->laboratory_id}}</td>
+                <td>@if($sat->dna_extracted=="on") {{"Yes"}} @else {{"No"}} @endif</td>
                     <td>{{$sat->collection_site_id}}</td>
                     <td>
                     <form action="{{route('changesStatus')}}" method="post">

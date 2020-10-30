@@ -32,6 +32,7 @@
                     <th>Sample Status</th>
                     <th>Manifest ID</th>
                     <th>Edit Result</th>
+                    <th>Print</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,22 +64,19 @@
                     <td>{{$sat->shipping_manifest_id}}</td>             
                     
                     <td> 
-                      <a href="{{url('add_results/'.$sat->id)}}" class="btn btn-small waves-effect btn blue darken-5 waves-light tooltipped" data-position="top" data-tooltip="Add Results"><i class="material-icons">add</i></a>               
+                      <a href="{{url('add_results/'.$sat->id)}}" class="btn btn-small waves-effect btn blue darken-5 waves-light tooltipped" data-position="top" data-tooltip="Edit Result"><i class="material-icons">add</i></a>               
+                    </td>
+                    <td>                      
+                        @foreach ($results as $res)
+                            @if ($res->sample_id==$sat->specimen_id)
+                            <a href="/specimen_result/{{$res->id}}" class="btn btn-small waves-effect btn blue darken-5 waves-light tooltipped" data-position="top" data-tooltip="Print Result"><i class="material-icons">print</i></a>               
+                            @endif
+                        @endforeach
                     </td>
                 </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>Sample ID</th>
-                    <th>Speciment Type</th>                   
-                    <th>Lab ID</th>
-                    <th>Site ID</th>
-                    <th>Sample Status</th>
-                    <th>Manifest ID</th>
-                    <th>Edit</th>
-                </tr>
-            </tfoot>
+            
         </table>
         <div class="col m6 offset-m3">{{$samples->links()}}</div>
         @else

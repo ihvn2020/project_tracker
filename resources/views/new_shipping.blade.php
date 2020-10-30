@@ -52,11 +52,11 @@
                         <div class="row">
                             <div class="input-field col s6 ">
                                 <input id="shipping_laboratory_phone" type="text" class="validate" name="shipping_laboratory_phone">
-                                <label for="shipping_laboratory_phone">Shipping Lab Phone</label>
+                                <label for="shipping_laboratory_phone">Shipping Site Phone</label>
                             </div>
                             <div class="input-field col s6 ">
                                 <input id="shipping_laboratory_email" type="email" class="validate" name="shipping_laboratory_email">
-                                <label for="shipping_laboratory_email">Shipping Lab E-mail</label>
+                                <label for="shipping_laboratory_email">Shipping Site E-mail</label>
                             </div>                       
                             
                         </div>
@@ -75,7 +75,7 @@
                         <h6>Samples Info</h6>
                         <div class="row">
                             <div class="input-field col s4">
-                            <input id="number_of_cryovial_tubes" type="number" class="validate" name="number_of_cryovial_tubes" value="{{$shipping->number_of_cryovial_tubes}}">
+                            <input id="number_of_cryovial_tubes" type="number" class="validate" name="number_of_cryovial_tubes">
                                 <label for="number_of_cryovial_tubes">Number of Cryovial Tubes</label>
                             </div>
                             <div class="input-field col s4">

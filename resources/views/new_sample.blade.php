@@ -11,12 +11,19 @@
                         @csrf
 
                         <div class="row">
-                            <div class="input-field col s6">
+                            <div class="input-field col s4">
                                 <input id="birthdate" type="date" class="datepicker" name="birthdate">
                                 <label for="birthdate">Date of Birth</label>
                             </div>
+                            <div class="input-field col s1">
+                                <h5>OR</h5>
+                            </div>
+                            <div class="input-field col s2">
+                                <input id="age" type="number" class="validate" name="age">
+                                <label for="age">Age</label>
+                            </div>
                             
-                            <div class="input-field col s6">
+                            <div class="input-field col s5">
                                     <select name="gender" id="gender">
                                         <option value="M" selected="selected">Male</option>
                                         <option value="F">Female</option>
@@ -26,22 +33,24 @@
                         </div>
                         <h6>Location the Sample Was Taken From:</h6>
                         <div class="row">
-                            <div class="input-field col s6 ">
+                            <div class="input-field col s4 ">
                                 <input id="hosp_id" type="text" class="validate" name="hosp_id">
-                                <label for="hosp_id">Facility ID</label>
+                                <label for="hosp_id">Location Name/Facility ID<small> e.g. state, facility name</label>
                             </div>
-                            <div class="input-field col s6 ">
+                            <div class="input-field col s4 ">
                                 <input id="other_id" type="text" class="validate" name="other_id">
-                                <label for="other_id">Other ID <small>e.g. Patient Hosp. No. etc</small></label>
+                                <label for="other_id">Any Other ID <small>e.g. Patient Hosp. No. etc</small></label>
+                            </div>
+                            
+                            <div class="input-field col s4">
+                                <input id="specimen_id" type="text" class="validate" name="specimen_id">
+                                <label for="specimen_id">Reference Lab Sample ID</label>
                             </div>
                         </div>
 
 
                         <div class="row">
-                            <div class="input-field col s4">
-                                <input id="specimen_id" type="text" class="validate" name="specimen_id">
-                                <label for="specimen_id">Sample ID</label>
-                            </div>
+                           
                             
                             <div class="input-field col m4">
                             <select name="specimen_type" id="specimen_type">
@@ -62,6 +71,17 @@
                                 <input id="sample_collection_date" type="text" class="datepicker" name="sample_collection_date">
                                 <label for="sample_collection_date">Sample Collection Date</label>
                             </div>
+
+                            <div class="input-field col m4">
+                                <select name="result_type" id="result_type">
+                                    <option value="MDR">MDR</option>
+                                    <option value="PreXDR">PreXDR</option>
+                                    <option value="XDR" selected>XDR</option>
+                                   
+                                </select>
+                                    <label for="result_type">Result Type</label>
+    
+                            </div>
                         </div>
                         <div class="row">
                             <div class="input-field col m4">
@@ -81,7 +101,17 @@
                        
                         
                         <div class="row">
-                            <div class="input-field col s6">
+                            <div class="input-field col m4">
+                                <select name="isolate_type" id="isolate_type">
+                                    <option value="Liquid">Liquid</option>
+                                    <option value="Solid">Solid</option>
+                                    
+                                </select>
+                                    <label for="isolate_type">Type of Isolate</label>
+    
+                                </div>
+
+                            <div class="input-field col s4">
                                 <select name="collection_site_id" id="collection_site_id">
                                 <option value="{{auth()->user()->site_name}}" selected>{{auth()->user()->site_name}}</option>
                                    @if (isset($sites))
@@ -93,7 +123,7 @@
                                 <label for="collection_site_id">NRL Collection Site</label>
                             </div>     
                     
-                            <div class="input-field col s6 ">
+                            <div class="input-field col s4 ">
                                 <input id="remark" type="text" class="validate" name="remark">
                                 <label for="remark">Remarks</label>
                             </div>

@@ -112,6 +112,21 @@
                 </li>
           </ul>
         </li>
+
+        <li class="white">
+          <ul class="collapsible collapsible-accordion">
+            
+                <li>
+                  <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">list</i>Indicators / Reporting<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                  <div class="collapsible-body">
+                    <ul>
+                      <li><a class="waves-effect waves-blue" href="/workload"><i class="material-icons">fullscreen</i>Workload/Turnaround Time<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
+                      <li><a class="waves-effect waves-blue" href="/"><i class="material-icons">swap_horiz</i>Resistance Pattern<span class="new badge right yellow darken-3"></span></a></li>
+                    </ul>
+                  </div>
+                </li>
+          </ul>
+        </li>
          
       @elseif(auth()->user()->role=='Staff')
 
@@ -182,8 +197,8 @@
                 <ul id="profile-dropdown2" class="dropdown-content">
                     <li><a href="#"><i class="material-icons">person</i>Profile</a></li>
                     <li class="divider"></li>
-        <a href="#" id="unlock" class="btn btn-large">Click Here to Unlock Screen</a><hr>
-                <li><a href="#lockscreenModal" class="lockscreen modal-trigger" data-username="{{auth()->user()->name}}"><i class="material-icons">lock</i>Lock</a></li>
+                    <a href="#" id="unlock" class="btn btn-large">Click Here to Unlock Screen</a><hr>
+                    <li><a href="#lockscreenModal" class="lockscreen modal-trigger" data-username="{{auth()->user()->name}}"><i class="material-icons">lock</i>Lock</a></li>
                     <li><a href="/logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
                 </ul>
             

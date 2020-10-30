@@ -48,11 +48,11 @@
                         <div class="row">
                             <div class="input-field col s6 ">
                                 <input id="shipping_laboratory_phone" type="text" class="validate" name="shipping_laboratory_phone"  value="{{$shipping->shipping_laboratory_phone}}">
-                                <label for="shipping_laboratory_phone">Shipping Lab Phone</label>
+                                <label for="shipping_laboratory_phone">Shipping Site Phone</label>
                             </div>
                             <div class="input-field col s6 ">
                                 <input id="shipping_laboratory_email" type="email" class="validate" name="shipping_laboratory_email" value="{{$shipping->shipping_laboratory_email}}">
-                                <label for="shipping_laboratory_email">Shipping Lab E-mail</label>
+                                <label for="shipping_laboratory_email">Shipping Site E-mail</label>
                             </div>                       
                             
                         </div>
@@ -80,10 +80,10 @@
                             </div>
                             <div class="input-field col s4">
                                 <select name="processing_site_id" id="processing_site_id">
-                                    <option  value="{{$shipping->processing_site_id}}">{{$shipping->processing_site_id}}</option>
+                                    <option  value="{{$shipping->processing_site_id}}" selected>{{$shipping->processing_site_id}}</option>
                                     @if (isset($sites))
                                          @foreach ($sites as $p)                                         
-                                             <option value="{{$p->id}}" selected="selected">{{$p->site_name.' - '.$p->id}}</option>
+                                             <option value="{{$p->id}}">{{$p->site_name.' - '.$p->id}}</option>
                                          @endforeach
                                      @endif
                                  </select>

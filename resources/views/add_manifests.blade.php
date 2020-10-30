@@ -21,7 +21,7 @@
             <form action="{{ route('add_manifest') }}" method="post">
                 @csrf
                 <div class="input-field col s6">
-                    <input id="manifest_id" type="text" class="validate" name="manifest_id" required>
+                    <input id="manifest_id" type="text" class="validate" name="manifest_id" value="{{$manifest_id}}" required>
                     <label for="manifest_id">Enter Manifest ID</label>
                 </div>
                 <small>Select / Add Samples From the Table Below</small>

@@ -61,10 +61,10 @@
                     </td>
                     <td>{{$sh->number_of_cryovial_tubes}}</td>
                     <td>{{$sh->tracking_waybill_number}}</td>
-                    <td>{{\App\sites::where('id',$sh->processing_site_id)->first()->site_name}}</td>
+                    <td>{{\App\sites::where('id',$sh->processing_site_id)->first()->site_name ?? ''}}</td>
                     <td style="font-size: 0.8em !important;">
-                        <strong>R.L.O.N:</strong> {{$sh->shipping_site_contact_person}}<br>
-                        <strong>R.L.O.Ph:</strong> {{$sh->shipping_laboratory_phone}}
+                        <strong>Sequencing Lab</strong>
+                        
                     </td>
                     <td>
                     <form action="{{route('changesmStatus')}}" method="post">
@@ -120,7 +120,7 @@
                                         <form method="POST" action="{{route('print_manifest')}}">
                                             @csrf
                                             <input type="hidden" name="shipping_manifest_id" value="{{$sh->shipping_manifest_id}}">
-                                        <button class="btn-floating btn-small waves-effect green waves-light tooltipped" data-position="top" data-tooltip="This this Manifest"><i class="material-icons">print</i></button>
+                                        <button class="btn-floating btn-small waves-effect green waves-light tooltipped" data-position="top" data-tooltip="Print this Manifest"><i class="material-icons">print</i></button>
                                         </form>
                                 </li>
 
@@ -140,7 +140,7 @@
                     <th>Tubes</th>
                     <th>Tracking W. No</th>
                     <th>Processing Site</th>
-                    <th>Receivers Contacts</th>
+                    <th>Sent To</th>
                     <th>Manifest Status</th>
                     <th>Action</th>
                 </tr>

@@ -44,7 +44,9 @@ class SamplesController extends Controller
     public function print_manifest(Request $request){
         $manifest_id = $request->shipping_manifest_id;
         $samples = samples::orderBy('sample_id', 'asc')->where('shipping_manifest_id','=',$manifest_id)->get();
-        return view('sample_print',compact('samples'));
+        $processing_site = shipping::select('processing_site_id')->where('shipping_manifest_id','=',$manifest_id)->first()->processing_site_id;
+
+        return view('sample_print',compact('samples'))->with(['processing_site'=>$processing_site]);
     }
 
     /**
@@ -77,10 +79,20 @@ class SamplesController extends Controller
         
 
         $patient_id = "HOSPNo".substr(md5(uniqid(mt_rand(), true).microtime(true)),0, 8); 
+        
+        if(isset($request->age) && $request->age!=''){
+            $age = $request->age;
+        }elseif(isset($request->birthdate)){
+            // $age = $request->birthdate->diffInYears(\Carbon::now());
+            $age = 12;
+        }else{
+            $age = $request->age;
+        }
 
         patients::create([
             'patient_id'=>$patient_id,
             'birthdate'=>$request->birthdate,
+            'age'=>$age,
             'gender'=>$request->gender,
             'hosp_id'=>$request->hosp_id,
             'other_id'=>$request->other_id,           
@@ -99,7 +111,7 @@ class SamplesController extends Controller
 
         samples::create([
             'sample_id'=>$sample_id,
-            'patient_id'=>$request->patient_id,
+            'patient_id'=>$patient_id,
             // 'shipping_manifest_id'=>$request->shipping_manifest_id,
             'specimen_type'=>$request->specimen_type,
             'sample_collection_date'=>$request->sample_collection_date, 
@@ -171,10 +183,17 @@ class SamplesController extends Controller
      */
     public function update(Request $request, samples $samples)
     {
+
+        $patient = patients::where('patient_id','=', $request->pid);
+        $patient->update([
+            'birthdate'=>$request->birthdate,
+            'age'=>$request->age,
+            'gender'=>$request->gender,
+            'hosp_id'=>$request->hosp_id,
+            'other_id'=>$request->other_id,           
+        ]);
+
         $sample = samples::where('id','=', $request->id);
-
-        $relatedManifests = samples::where('shipping_manifest_id','=', $request->shipping_manifest_id);
-
         $sample->update([
             'sample_id'=>$request->sample_id,
             'patient_id'=>$request->patient_id,
@@ -192,20 +211,13 @@ class SamplesController extends Controller
             'specimen_temperature_arrival'=>$request->specimen_temperature_arrival,
             'receiving_lab_officer_remark'=>$request->receiving_lab_officer_remark,
             'quality_check'=>$request->quality_check,
-            'gridbox_number'=>$request->gridbox_number
+            'gridbox_number'=>$request->gridbox_number,
+            'nrl_arrival_date'=>$request->nrl_arrival_date,
+            'dna_extracted'=>$request->dna_extracted,
+            'dna_extraction_date'=>$request->dna_extraction_date
         ]);
         
-        $relatedManifests->update([
-            'date_specimen_shipped'=>$request->date_specimen_shipped,
-            'date_specimen_arrived_sequence_lab'=>$request->date_specimen_arrived_sequence_lab,
-            'receiving_lab_officer'=>$request->receiving_lab_officer,
-            'receiving_lab_officer_phone'=>$request->receiving_lab_officer_phone,
-            // Bring down some values here         
-            'updated_by'=>Auth::user()->id,
-            'date_updated'=>date("Y-m-d")            
-        ]);
-
-
+        
         audit::create([
             'action'=>"Updated Sample ID ".$request->sample_id,
             'description'=>'A Sample Record was updated',
@@ -244,7 +256,6 @@ class SamplesController extends Controller
     }
 
     public function addSample($id){
-        $patients = patients::select('patient_id','first_name','last_name','other_names')->where('id',$id)->get();
         $users = User::select('id','name')->get();
         $sites = sites::select('id','site_name')->get();
         $sample = samples::where('id','=', $id)->first();
@@ -252,7 +263,7 @@ class SamplesController extends Controller
         if(isset($sample->id)){    
             $specimens = specimen_results::where('sample_id',$sample->specimen_id)->get();     
             session()->flash('message','Note: All samples related to this Shipment manifest ID will be updated with shipping information.');
-            return view('sample')->with(['patients'=>$patients,'users'=>$users,'sample'=>$sample,'sites'=>$sites,'specimens'=>$specimens]);   
+            return view('sample')->with(['users'=>$users,'sample'=>$sample,'sites'=>$sites,'specimens'=>$specimens]);   
         }else{
             return redirect()->route('add_sample');
         }
@@ -277,7 +288,8 @@ class SamplesController extends Controller
     public function addManifests(){
         $samples = samples::orderBy('sample_id', 'asc')->where([['voided','!=',1],['shipping_manifest_id','=',NULL]])->paginate(50);
         $all_samples = samples::select('sample_id','patient_id', 'specimen_id')->where('voided','!=',1)->get();
-        return view('add_manifests',compact('samples'), ['all_samples'=>$all_samples]);
+        $manifest_id = "NG/PLJ/CDC/IHVN/S".substr(md5(uniqid(mt_rand(), true).microtime(true)),0, 6); 
+        return view('add_manifests',compact('samples'), ['all_samples'=>$all_samples,'manifest_id'=>$manifest_id]);
     }
 
     public function postManifests(Request $request){
@@ -313,4 +325,61 @@ class SamplesController extends Controller
         return redirect()->route('shipping',$shippingid);
 
     }
+
+    public function workload(){
+        return view('workload_indicators');
+    }
+
+    public function workload_indicators(Request $request){
+        $this->validate($request, [
+            'from' => 'required',
+            'to' => 'required'
+        ]);
+
+            $from = date($request->from);
+            $to = date($request->to);
+
+            $get_samples = samples::whereBetween('sample_collection_date', [$from, $to])->get();
+            
+            $number_of_isolates = count($get_samples);            
+            
+            $liquid_isolates = $get_samples->where('isolate_type','Liquid')->count();
+            $solid_isolates = $get_samples->where('isolate_type','Solid')->count();
+
+            $young = $get_samples->where('age','<=',15)->count();
+            $adult = $get_samples->where('age','>=',15)->count();
+
+            $males = $get_samples->where('gender','M')->count();
+            $females = $get_samples->where('gender','F')->count();
+            
+            $mdr = $get_samples->where('result_type','MDR')->count();
+            $prexdr = $get_samples->where('result_type','preXDR')->count();
+            $xdr = $get_samples->where('result_type','XDR')->count();
+
+            $dnas = $get_samples->where('dna_extracted','on')->count();
+            $dnashipped = $get_samples->where('date_specimen_shipped','!=','')->where('dna_extracted','on')->count();
+            
+            $results_generated = $get_samples->where('sample_status','Result Added')->count();
+
+            
+        return view('workload_indicators')->with([
+            'from'=>$from,
+            'to'=>$to,
+            'number_of_isolates'=>$number_of_isolates,
+            'liquid_isolates'=>$liquid_isolates,
+            'solid_isolates'=>$solid_isolates,
+            'young'=>$young,
+            'adult'=>$adult,
+            'males'=>$males,
+            'females'=>$females,
+            'mdr'=>$mdr,
+            'prexdr'=>$prexdr,
+            'xdr'=>$xdr,
+            'dnas'=>$dnas,
+            'dnashipped'=>$dnashipped,
+            'results_generated'=>$results_generated
+        ]);
+    }
+
+    
 }

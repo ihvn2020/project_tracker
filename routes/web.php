@@ -109,6 +109,9 @@ Route::get('/sample_results', 'SamplesController@sample_results')->name('sample_
 Route::post('/add_manifest', 'SamplesController@postManifests')->name('add_manifest')->middleware('auth');
 Route::post('print_manifest', 'SamplesController@print_manifest')->name('print_manifest')->middleware('auth');
 
+// INDICATORS
+Route::get('/workload', 'SamplesController@workload')->name('workload')->middleware('auth');
+Route::post('/workload_indicators', 'SamplesController@workload_indicators')->name('workload_indicators')->middleware('auth');
 
 // Sites
 Route::resource('sites', 'SitesController')->middleware('auth');
