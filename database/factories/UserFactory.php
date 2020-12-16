@@ -20,15 +20,15 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => 'RESTHub Admin',
-        'email' => 'resthub_admin@tb.org',
+        'name' => 'Tracking Admin',
+        'email' => 'tracking_admin@ihvn-tracking.org',
         'email_verified_at' => now(),       
         'phone_number' => 2348012345678,
-        'unit' => 'HI',
-        'department' => 'SI',
-        'facility' => 'IHVN CENTRAL OFFICE',
+        'state' => 'FCT',
+        'lga' => 'AMAC',
+        'health_facility' => 'IHVN CENTRAL OFFICE',
         'role' => 'Admin',
-        'site_name'=>'IHVN',
+       
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),        
     ];

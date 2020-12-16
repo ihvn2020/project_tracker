@@ -77,7 +77,7 @@ $(document).ready(function(){
         "paging": false,
         "pageLength": 50,
         "filter": true,
-        "ordering": false,
+        "ordering": true,
         deferRender: true,
         dom: 'Bfrtip',
         buttons: [
@@ -210,7 +210,10 @@ $(document).ready(function(){
     });
 
     $("#shipment").hide();
+
+    $('.tabs').tabs();
   
+    
     
 }); // END DOCUMENT READY
 
@@ -220,6 +223,14 @@ function addtoManifest(id,sampleid,new_class){
         $("table tbody#allsamples").append("<tr scope='row' class='row"+new_class+"'><td class='input-field'><input type='hidden' name='id[]' value='"+id+"'><input type='text' name='sampleids[]' value='"+sampleid+"' readonly></td><td><a href='#' class='btn-floating red btn-small delpos' onClick='delRow("+new_class+")'><i class='small material-icons'>remove</i></a></td></tr>");
 }   
 
+function getInivalue(facilityid){
+    $("."+facilityid).on("change paste keyup", function() {
+        var ini_value;
+            alert($('.'+facilityid +'options:selected').data('initial_value'));
+            
+            $('#initial_value input').val(ini_value);
+        });
+}
 
 function delItem(id,table){
     $.ajax({

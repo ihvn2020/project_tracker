@@ -1,4 +1,4 @@
-@extends('template')
+@extends('template2')
 
 @section('content')
 <div class="container">
@@ -47,41 +47,53 @@
                         </div>
 
                         <div class="input-field">
-                            <select name="facility" id="facility" materialize="material_select">
-                                <option value="{{$user->facility}}" selected>{{$user->facility}}</option>
-                                @foreach ($facilities as $facility)                                            
-                                <option value="{{$facility->id}}">{{$facility->facility_name}}</option>
+                            <select name="state" id="state" materialize="material_select">
+                                <option value="{{$user->state}}" selected>{{$user->state}}</option>
+                                @php
+                                 $states = \App\tracker::select('state')->distinct()->get();
+                                @endphp
+                                @foreach ($states as $state)                                            
+                                <option value="{{$state->state}}">{{$state->state}}</option>
                                 @endforeach
                             </select>
-                            <label for="facility">Select Facility</label>
+                            <label for="state">Select State</label>
                         </div>
 
                         <div class="input-field">
-                            <select name="department" id="department" materialize="material_select">
-                                <option value="{{$user->name}}" department>{{$user->department}}</option>
-                                @foreach ($departments as $department)                                            
-                                <option value="{{$department->id}}">{{$department->department_name}}</option>
+                            <select name="lga" id="lga" materialize="material_select">
+                                <option value="{{$user->lga}}" selected>{{$user->lga}}</option>
+
+                                @php
+                                $lgas = \App\tracker::select('lga')->distinct()->get();
+                               @endphp
+                                @foreach ($lgas as $lga)                                            
+                                <option value="{{$lga->lga}}">{{$lga->lga}}</option>
                                 @endforeach
                             </select>
-                            <label for="department">Select Department</label>
+                            <label for="lga">Select LGA</label>
                         </div>
 
                         <div class="input-field">
-                            <select name="unit" id="unit" materialize="material_select">
-                                <option value="{{$user->unit}}" selected>{{$user->unit}}</option>
-                                @foreach ($units as $unit)                                            
-                                <option value="{{$unit->id}}">{{$unit->unit_name}}</option>
+                            <select name="health_facility" id="health_facility" materialize="material_select">
+                                <option value="{{$user->health_facility}}" selected>{{$user->health_facility}}</option>
+                                @php
+                                $health_facilities = \App\tracker::select('health_facility')->distinct()->get();
+                               @endphp
+
+                                @foreach ($health_facilities as $health_facility)                                            
+                                <option value="{{$health_facility->health_facility}}">{{$health_facility->health_facility}}</option>
                                 @endforeach
                             </select>
-                            <label for="unit">Select Unit</label>
+                            <label for="health_facility">Select Health Facility</label>
                         </div>
+
 
                         <div class="input-field">
                             <select name="role" id="role">
                                 <option value="{{$user->role}}" selected>{{$user->role}}</option>
-                                <option value="Admin">Admin</option>
-                                <option value="Manager">Manager</option>
-                                <option value="User">User</option>
+                                <option value="Admin">System Admin</option>
+                                <option value="State Manager">State Manager</option>
+                                <option value="Facility Manager" selected>Facility Manager</option>
                             </select>
                             <label for="role">Select Role</label>
                         </div>

@@ -245,59 +245,7 @@
     
 </body>
     <script src="{{asset('/js/jquery-3.5.1.js')}}"></script>
-    <script type="text/javascript">
-      $(function () {
-     
-      var emrsites = [<?php echo $emrsites; ?>];
-      var enmrs = [<?php echo $enmrs; ?>];
-      var cmmm = [<?php echo $cmmm; ?>];
-      var limsm = [<?php echo $limsm; ?>];
-      var mbd = [<?php echo $mbd; ?>];
-      var tvbc = [<?php echo $tvbc; ?>];
-
-      console.log(emrsites);
-      $('#basic-area').highcharts({
-          chart: {
-          type: 'column'
-          },
-          title: {
-          text: 'Performace Tracker Across States'
-          },
-          xAxis: {
-          categories: ['FCT','Katsina','Nasarawa','Rivers']
-          },
-          yAxis: {
-              title: {
-              text: 'Indicator'
-          }
-          },
-          series: [{
-          name: 'EMR Sites',
-          data: emrsites
-          },
-          {
-          name: 'Enterprise NMRS',
-          data: enmrs
-          },
-          {
-          name: 'CMM Deployed',
-          data: cmmm
-          },
-          {
-          name: 'LIMS/NMRS Integration Deployed',
-          data: limsm
-          },
-          {
-          name: 'Updated PBS Module',
-          data: mbd
-          },
-          {
-          name: 'Total Valid Fingerprints',
-          data: tvbc
-          }, ]
-      });
-      });
-    </script>
+    
     <script src="{{asset('/js/pmain.js')}}"></script>
     <script src="{{asset('/js/materialize.min.js')}}"></script>
     <!--<script src="/js/material2.min.css"></script>-->

@@ -1,9 +1,9 @@
-## RESTHub | TB Management System
+## Project Tracker | Project Performance Management
 
-A management system for TB Referencing, Shipping, Sequencing and Result reporting for IHVN:
+A management system for tracking project performance, services deployment and daily reporting of status variables from facilities for IHVN:
 
 # Features
-- Referencing ... Results
+- Tracking ... Results
 - More ...
 
 ## Project Sponsors

@@ -25,48 +25,16 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard')->middleware(
 Route::resource('settings', 'SettingsController');
 Route::get('edit_settings/{id}', 'SettingsController@edit')->name('edit_settings');
 
-// Suppliers
-Route::resource('suppliers', 'SupplierController');
-Route::get('add_supplier', 'SupplierController@create')->name('add_supplier');
-
-// Inventories
-Route::resource('inventories', 'InventoryController');
-Route::get('add_item', 'InventoryController@create')->name('add_item');
-Route::get('item/{id}', 'InventoryController@edit');
-Route::get('print_item/{id}', 'InventoryController@show')->name('print_item');
-Route::get('reports', 'InventoryController@reports')->name('reports');
-
-// Item Requests
-Route::get('requests', 'InventoryController@requests')->name('requests');
-Route::get('request/{id}', 'InventoryController@request')->name('request');
-
-Route::post('new_request', 'InventoryController@new_request')->name('new_request');
-Route::post('request_destroy','InventoryController@request_destroy')->name('request_destroy');
-Route::post('update_request', 'InventoryController@update_request')->name('update_request');
-
 // Facilities
 Route::resource('facilities', 'FacilitiesController');
 Route::get('add_facility', 'FacilitiesController@create')->name('add_facility');
 Route::get('facility/{id}', 'FacilitiesController@edit');
 
-// Movements
-Route::resource('movements', 'MovementController');
-Route::get('move_item/{id}', 'MovementController@edit')->name('move_item');
-
 // Audits
 Route::resource('audits', 'AuditController');
 
-// Departments
-Route::resource('departments', 'DepartmentController');
-Route::get('add_department', 'DepartmentController@create')->name('add_department');
-
 // Categories
 Route::resource('categories', 'CategoryController');
-
-
-// Units
-Route::resource('units', 'UnitController');
-Route::get('add_unit', 'UnitController@create')->name('add_unit');
 
 // ACCESS AND AUTHENTICATIONS
 Auth::routes();
@@ -90,50 +58,17 @@ Route::get('help', function(){
 });
 
 
-// THIS IS NEW ROUTES FOR RESTHUB
+// THIS IS NEW ROUTES FOR TRACKING
+// Facilities
+Route::resource('tracking', 'TrackerController');
+Route::get('tfacility', 'TrackerController@create')->name('add_tracking');
+Route::get('tfacility/{id}', 'TrackerController@edit');
+Route::get('broadsheet', 'TrackerController@broadsheet')->name('broadsheet');
+Route::post('filtered_tracking', 'TrackerController@filtered_tracking')->name('filtered_tracking');
 
-// Patients
-Route::resource('patients', 'PatientsController')->middleware('auth');
-Route::get('add_patient', 'PatientsController@create')->name('add_patient')->middleware('auth');
-Route::get('patient/{id}', 'PatientsController@edit')->middleware('auth');
+// DAILY REPORTS
+Route::resource('dailyreports', 'DailyreportController');
 
-// Samples
-Route::resource('samples', 'SamplesController')->middleware('auth');
-Route::get('/nl_samples', 'SamplesController@nl_samples')->name('nl_samples')->middleware('auth');
-Route::get('/add_sample', 'SamplesController@create')->name('add_sample')->middleware('auth');
-Route::get('/sample/{id}', 'SamplesController@edit')->middleware('auth');
-Route::get('/add_psample/{id}', 'SamplesController@addSample')->middleware('auth');
-Route::post('/changesStatus', 'SamplesController@changesStatus')->name('changesStatus')->middleware('auth');
-Route::get('/addmanifest', 'SamplesController@addManifests')->name('add_manifests')->middleware('auth');
-Route::get('/sample_results', 'SamplesController@sample_results')->name('sample_results')->middleware('auth');
-Route::post('/add_manifest', 'SamplesController@postManifests')->name('add_manifest')->middleware('auth');
-Route::post('print_manifest', 'SamplesController@print_manifest')->name('print_manifest')->middleware('auth');
-
-// INDICATORS
-Route::get('/workload', 'SamplesController@workload')->name('workload')->middleware('auth');
-Route::post('/workload_indicators', 'SamplesController@workload_indicators')->name('workload_indicators')->middleware('auth');
-
-// Sites
-Route::resource('sites', 'SitesController')->middleware('auth');
-
-// Shipping
-Route::resource('shippings', 'ShippingController')->middleware('auth');
-Route::get('/add_shipping', 'ShippingController@create')->name('add_shipping')->middleware('auth');
-Route::get('/shipping/{id}', 'ShippingController@edit')->name('shipping')->middleware('auth');
-Route::get('/manifestconfirm/{id}', 'ShippingController@reception')->name('manifestconfirm')->middleware('auth');
-Route::post('/postreception/{id}', 'ShippingController@postreception')->name('postreception')->middleware('auth');
-Route::post('/changesmStatus', 'ShippingController@changesmStatus')->name('changesmStatus')->middleware('auth');
-
-// Specimen Results
-Route::resource('specimens', 'SpecimenResultsController')->middleware('auth');
-Route::get('/add_specimenresult', 'SpecimenResultsController@create')->name('add_specimenresult')->middleware('auth');
-Route::get('/specimenresult/{id}', 'SpecimenResultsController@edit')->middleware('auth');
-Route::get('/add_results/{id}', 'SpecimenResultsController@add_results')->name('add_results')->middleware('auth');
-Route::get('/specimen_result/{id}', 'SpecimenResultsController@specimen_result')->name('specimen_result')->middleware('auth');
-Route::get('/downloadpdf/{id}', 'SpecimenResultsController@download_pdfresult')->name('download_pdfresult')->middleware('auth');
-Route::get('/sendtoemail/{id}', 'SpecimenResultsController@sendresultTomail')->name('sendtoemail')->middleware('auth');
-
-// Drug Resistance
-Route::resource('resistances', 'DrugResistanceController')->middleware('auth');
-Route::get('/new_drugresistance/{id}', 'DrugResistanceController@create')->middleware('auth');
-Route::get('/drug_resistance/{id}', 'DrugResistanceController@edit')->middleware('auth');
+// INDICATORS REPORTS
+Route::get('indicators_reporting', 'DailyreportController@indicators_reporting')->name('indicators_reporting');
+Route::post('filtered_indicators', 'DailyreportController@filtered_indicators')->name('filtered_indicators');

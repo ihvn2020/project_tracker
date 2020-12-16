@@ -7,7 +7,7 @@
         }
     </style>
     <div class = "row" style="width:98%; margin:auto;">
-    <h5 class="text-center">List of Facilities in {{$state}}</h5>
+        <h5 class="text-center">List of Facilities</h5>
 
         <form action="{{ route('filtered_tracking') }}" style="width: 98%;margin:auto" class="center" method="post">
             @csrf
@@ -23,10 +23,12 @@
             <div class="col m3">
                 <div class="input-field">
                     <select name="state" id="state" materialize="material_select">
-                      
+                        <option value="All" selected>All</option>
                                                             
-                        <option value="{{$state}}">{{$state}}</option>
-                       
+                        <option value="FCT">FCT</option>
+                        <option value="Nasarawa">Nasarawa</option>
+                        <option value="Rivers">Rivers</option>
+                        <option value="Katsina">Katsina</option>
                         
                     </select>
                     <label for="state">Select State</label>
@@ -64,7 +66,7 @@
                     <tr>
                         <td>
                             <input type="checkbox" class="filled-in"  id="total_patients" name="trackfilters[]" value="total_patients">
-                            <label for="total_patients">Total #of Patients</label>
+                            <label for="total_patients">Ever Enrolled</label>
                         </td>
                         <td>
                             <input type="checkbox" class="filled-in"  id="pcr_lab_linked" name="trackfilters[]" value="pcr_lab_linked">
@@ -130,11 +132,13 @@
         <table id="products" class="display responsive-table" style="width:100%;clear: both;;">
             <thead class="thead-dark">
                 <tr>                    
-                    <th style="width: 10% !important;">LGA</th>
-                    <th style="width: 15% !important;">Health Facility</th>
-                    <th><small class="clear" style="clear: both;  color: green;">Select Duration (e.g. from date - to date) and Choose Indicator</small><hr>
-                    </th>
-                    <th>Actions </th>
+                    <th>State</th>
+                    <th>LGA</th>
+                    <th>Health Facility</th>
+                    <th>Datim ID</th>
+                    <th>Ever Enrolled</th>
+                    <th>TX_CURR</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -142,69 +146,25 @@
                 
                 <tr>
                     
-                    
+                    <td>{{$facility->state}}</td>
                     <td>{{$facility->lga}}</td>
-                    <td style="width: 20% !important;">{{$facility->health_facility}}</td>
-                    
-                    <td>
-                        <form action="{{route('dailyreports.store')}}" method="post" style="width: 90% !important;">
-                            @csrf
-                            <input id="state" type="hidden" name="state" value="{{$facility->state}}">
-                            <input id="lga" type="hidden" name="lga" value="{{$facility->lga}}">
-                            <input id="health_facility" type="hidden" name="health_facility" value="{{$facility->health_facility}}">
-                            <input type="hidden" name="id" value="{{$facility->id}}">
-
-                            <div class="row">
-                                <div class="input-field col m2">
-                                    <input id="from" type="date" class="datepicker" name="from" value="{{date('Y-m-d')}}" required>
-                                    <label for="from">From</label>
-                                </div>
-                                <div class="input-field col m2">
-                                    <input id="to" type="date" class="datepicker" value="{{date('Y-m-d')}}" name="to" required>
-                                    <label for="to">To</label>
-                                </div>
-                                <div class="input-field col m5">
-                                    <select name="indicator" id="indicator" class="{{$facility->id}}" onclick="getInivalue({{$facility->id}})" materialize="material_select" style="font-size: 80% !important;">
-                      
-                                                            
-                                    <option value="total_bio_captured" data-initial_value="{{$total_bio_captured = $freports->where('health_facility',$facility->health_facility)->where('indicator','total_bio_captured')->first()->value ?? ''}}">Current Total Fingerprints Captured - <small>{{$total_bio_captured ?? ''}}</option>
-                                        <option value="total_valid_bio" data-initial_value="{{$total_valid_bio = $freports->where('health_facility',$facility->health_facility)->where('indicator','total_valid_bio')->first()->value ?? ''}}">Current Total Valid Fingerprints Captured - <small>{{$total_valid_bio ?? ''}}</option>
-                                        <option value="tx_curr" data-initial_value="{{$tx_curr = $freports->where('health_facility',$facility->health_facility)->where('indicator','tx_curr')->first()->value ?? ''}}">Current TX_Curr - <small>{{$tx_curr ?? ''}}</small></option>
-                                        <option value="limsemr_manifests_sent" data-initial_value="{{$limsemr_manifests_sent = $freports->where('health_facility',$facility->health_facility)->where('indicator','limsemr_manifests_sent')->first()->value ?? ''}}">All Manifests Sent - <small>{{$limsemr_manifests_sent ?? ''}}</option>
-                                        <option value="tx_new" data-initial_value="{{$tx_new = $freports->where('health_facility',$facility->health_facility)->where('indicator','tx_new')->last()->value ?? ''}}">Current Total TX New - <small>{{$tx_new}}</option>
-                                        <option value="total_patients" data-initial_value="{{$total_patients = $freports->where('health_facility',$facility->health_facility)->where('indicator','total_patients')->first()->value ?? ''}}">Current # of Ever Enrolled - <small>{{$total_patients ?? ''}}</option>
-                                        <option value="pvls" data-initial_value="{{$pvls = $freports->where('health_facility',$facility->health_facility)->where('indicator','pvls')->first()->value ?? ''}}">Current Total PVLS - <small>{{$pvls ?? ''}}</option>
-                                        <option value="viral_load" data-initial_value="{{$viral_load = $freports->where('health_facility',$facility->health_facility)->where('indicator','viral_load')->first()->value ?? ''}}">Current # Total Viral Load Done - <small>{{$viral_load ?? ''}}</option>
-                                       
-                                        
-                                    </select>
-                                    <label for="indicator">Select Indicator/Variable</label>
-                                </div>
-                                <div class="input-field col m2">
-                                    <input id="value" type="number" step="0.01" class="validate" name="value" required>
-                                    <label for="value">Value</label>
-                                </div>
-
-                                <input id="initial_value" type="hidden" name="initial_value">
-
-                                
-                                <div class="input-field col m1">
-                                    <button type="submit" class="btn blue darken-5">Update</button>
-                                </div>
-                            </div>
-                        </form>    
-                    </td>                   
+                    <td>{{$facility->health_facility}}</td>
+                    <td>{{$facility->datim_id}}</td>
+                    <td>{{$facility->total_patients}}</td>
+                    <td>{{$facility->tx_curr}}</td>                   
                     
                     <td>                    
-                    <a href="/tfacility/{{$facility->id}}" class="btn-floating small btn-mini blue darken-2" style="margin-top: -20px !important;"><i class="large material-icons">edit</i></a>
+                    <a href="/tfacility/{{$facility->id}}" class="btn btn-small blue darken-2">View/Update</a>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
             <tfoot>
-                <tr>                    
+                <tr><th>State</th>
                     <th>LGA</th>
-                    <th style="width: 20% !important;">Health Facility</th>
+                    <th>Health Facility</th>
+                    <th>Datim ID</th>
+                    <th>Ever Enrolled</th>
                     <th>TX_CURR</th>
                     <th>Actions</th>
                 </tr>

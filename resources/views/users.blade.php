@@ -1,4 +1,4 @@
-@extends('template')
+@extends('template2')
 
 @section('content')
     
@@ -20,9 +20,9 @@
                         <th>Name</th>
                         <th>E-mail</th>
                         <th>Phone Number</th>
-                        <th>Unit</th>
-                        <th>Department</th>
-                        <th>Facility</th>
+                        <th>State</th>
+                        <th>LGA</th>
+                        <th>Health Facility</th>
                         <th>Role</th>
                         <th>Actions</th>
                     </tr>
@@ -34,9 +34,9 @@
                         <td>{{$ca->name}}</td>
                         <td>{{$ca->email}}</td>
                         <td>{{$ca->phone_number}}</td>
-                        <td>{{$ca->unit}}</td>
-                        <td>{{$ca->department}}</td>
-                        <td>{{$ca->facility}}</td>
+                        <td>{{$ca->state}}</td>
+                        <td>{{$ca->lga}}</td>
+                        <td>{{$ca->health_facility}}</td>
                         <td>{{$ca->role}}</td>
                         <td>                    
                             <div class="fixed-action-btn horizontal direction-top direction-left click-to-toggle sales_action" style="position: relative !important; float: text-align: center; display: inline-block; bottom: 0px !important; padding: 0px !important">
@@ -68,13 +68,13 @@
                     @endforeach
                 </tbody>
                 <tfoot>
-                    <tr>                    
+                    <tr>
                         <th>Name</th>
                         <th>E-mail</th>
                         <th>Phone Number</th>
-                        <th>Unit</th>
-                        <th>Department</th>
-                        <th>Facility</th>
+                        <th>State</th>
+                        <th>LGA</th>
+                        <th>Health Facility</th>
                         <th>Role</th>
                         <th>Actions</th>
                     </tr>

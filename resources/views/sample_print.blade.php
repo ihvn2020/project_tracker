@@ -1,7 +1,5 @@
 @extends('print_template')
-
-@section('content')
-    
+@section('content')    
     <div class = "row" style="width:98%; margin:auto;">
         <div class="center">
             <img src="/uploads/{{$site_settings->logo}}" alt="No Image Uploaded!" height="80" width="auto">
@@ -13,7 +11,7 @@
     
         @if ($samples!=NULL)
           
-        <table id="products" class="display print_table responsive-table" style="width:100%;;">
+        <table id="products" class="display print_table responsive-table" style="width:100%;">
             <thead class="thead-dark">
                 <tr>     
                     <th>S/N</th>               
