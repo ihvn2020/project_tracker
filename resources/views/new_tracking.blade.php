@@ -80,35 +80,27 @@
         
                                 <div class="input-field">
                                         <input id="total_patients" type="number" class="validate" name="total_patients">
-                                        <label for="total_patients" value="{{$facility->total_patients}}">Total No of Patients</label>
+                                        <label for="total_patients" value="{{$facility->total_patients}}">Ever Enrolled</label>
                                 </div>
         
-                                <div class="input-field">
-                                        <input id="pcr_lab_linked" type="text" class="validate" name="pcr_lab_linked"value="{{$facility->pcr_lab_linked}}">
-                                        <label for="pcr_lab_linked">PCR Lab Linked</label>
-                                </div>
+                                
         
                                 <div class="input-field">
-                                    <input id="tx_curr" type="number" class="validate" name="tx_curr"value="{{$facility->tx_curr}}">
+                                    <input id="tx_curr" type="number" class="validate" name="tx_curr"value="{{$facility->tx_curr}}" readonly>
                                     <label for="tx_curr">Current TX_CURR</label>
                                 </div>
+                                
                                 <div class="input-field">
-                                        <input id="central_database_upload" type="date" class="validate datepicker" name="central_database_upload"value="{{$facility->central_database_upload}}">
-                                        <label for="central_database_upload">Last Central Database Upload</label>
+                                    <input id="contactperson" type="text" class="validate" name="contactperson"value="{{$facility->contactperson}}">
+                                    <label for="contactperson">Contact Person Name</label>
                                 </div>
+                                
                                 <div class="input-field">
-                                    <input id="total_bio_captured" type="number" class="validate" name="total_bio_captured"value="{{$facility->total_bio_captured}}">
-                                    <label for="total_bio_captured">Total Biometric Captured</label>
+                                    <input id="phoneno" type="text" class="validate" name="phoneno"value="{{$facility->phoneno}}">
+                                    <label for="phoneno">Phone Number</label>
                                 </div>
-                                <div class="input-field">
-                                    <input id="total_valid_bio" type="number" class="validate" name="total_valid_bio"value="{{$facility->total_valid_bio}}">
-                                    <label for="total_valid_bio">Total Valid Biometric Captured</label>
-                                </div>
-                                <div class="input-field">
-                                    <input id="limsemr_manifests_sent" type="number" class="validate" name="limsemr_manifests_sent"value="{{$facility->limsemr_manifests_sent}}">
-                                    <label for="limsemr_manifests_sent"># of Manifests Sent from LIMS-EMR</label>
-                                </div>
-        
+                                
+                                
                                 
                                 
                                 
@@ -128,12 +120,12 @@
                                 @endif
 
                                 <div class="row">
-                                    <div class="col s12">
-                                        <ul class="tabs">
+                                    <div class="col s12  z-depth-1">
+                                        <ul class="tabs" style="font-size: 80% !important;">
                                         <li class="tab col s3"><a href="#test1">LIMS/EMR Integration</a></li>
                                         <li class="tab col s2"><a href="#test2">Commodity Module</a></li>
                                         <li class="tab col s2"><a href="#test3">RSL Module</a></li>
-                                        <li class="tab col s2"><a href="#test4">Fingerprint Update</a></li>
+                                        <li class="tab col s2"><a href="#test4">PBS Update</a></li>
                                         <li class="tab col s3"><a href="#test5">Enterprise NMRS</a></li>
                                         </ul>
                                     </div>
@@ -152,6 +144,49 @@
                                                                 <option value="Yes">Yes</option>
                                                                 <option value="No">No</option>
                                                             </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Date Deployed</td>
+                                                        <td class="input-field">
+                                                                <input id="limsemr_date_deployed" type="date" class="validate datepicker" name="limsemr_date_deployed"value="{{$facility->limsemr_date_deployed}}">                                                                
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total # of Manifests Sent</td>
+                                                        <td class="input-field">
+                                                            <input id="limsemr_manifests_sent" type="number" class="validate" name="limsemr_manifests_sent"value="{{$facility->limsemr_manifests_sent}}">
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Total # of Samples Sent</td>
+                                                        <td class="input-field">
+                                                            <input id="limsemr_samples_sent" type="number" class="validate" name="limsemr_samples_sent"value="{{$facility->limsemr_samples_sent}}">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total # of Manifests Verified at PCR Lab</td>
+                                                        <td class="input-field">
+                                                            <input id="limsemr_manifests_verified" type="number" class="validate" name="limsemr_manifests_verified"value="{{$facility->limsemr_manifests_verified}}">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>PCR Lab Linked To</td>
+                                                        <td class="input-field">
+                                                            <select name="pcr_lab_linked" id="pcr_lab_linked" {{$disabled??''}}>
+                                                                <option selected value="{{$facility->pcr_lab_linked}}">{{$facility->pcr_lab_linked}}</option>
+                                                                <option value="NRL">NRL</option>
+                                                                <option value="BMSH">BMSH</option>
+                                                            </select>
+                                                                
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>LIMS/EMR Comment</td>
+                                                        <td class="input-field">
+                                                                <input id="limsemr_comment" type="text" class="validate" name="limsemr_comment"value="{{$facility->limsemr_comment}}">
+                                                                
                                                         </td>
                                                     </tr>
                                                     
@@ -244,7 +279,7 @@
                                                     <tr>
                                                         
                                                         <td>
-                                                            Biometric Service Update
+                                                            Biometric Service Updated?
                                                                             
                                                         </td>
                                                         <td class="input-field">
@@ -267,6 +302,22 @@
                                                                 <option value="Yes">Yes</option>
                                                                 <option value="No">No</option>
                                                             </select>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Total Fingerprint Captured</td>
+                                                        <td class="input-field">
+                                                            <input id="total_bio_captured" type="number" class="validate" name="total_bio_captured"value="{{$facility->total_bio_captured}}">
+                                                            <label for="total_bio_captured">Total Biometric Captured</label>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total Valid Fingerprints</td>
+                                                        <td class="input-field">
+                                                            <input id="total_valid_bio" type="number" class="validate" name="total_valid_bio"value="{{$facility->total_valid_bio}}">
+                                                            <label for="total_valid_bio">Total Valid Biometric Captured</label>
                                                         </td>
                                                     </tr>
 
@@ -295,6 +346,12 @@
                                                             </select>
                                                         </td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Last Central Database Upload Date</td>
+                                                        <td class="input-field">
+                                                            <input id="central_database_upload" type="date" class="validate datepicker" name="central_database_upload"value="{{$facility->central_database_upload}}">
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                         </table>
                                     </div>
@@ -302,24 +359,25 @@
 
 
                                 
-                                <div class="input-field">
-                                    <input id="comments" type="text" class="validate" name="comments">
-                                    <label for="comments">Comments</label>
-                                </div>
-        
-                                <div class="input-field">
-                                    <input id="remarks" type="text" class="validate" name="remarks">
-                                    <label for="remarks">Remarks</label>
-                                </div>
-        
-        
-                                <div class="input-field text-right right" style="margin-bottom:20px;">
-                                    
-                                        <button type="submit" class="btn">
-                                            Update Facility Record
-                                        </button>                               
                                 
-                                </div>
+                            </div>
+                            <div class="input-field col m8 offset-m2">
+                                <input id="comments" type="text" class="validate" name="comments">
+                                <label for="comments">General Comment/ Issue</label>
+                            </div>
+    
+                            <div class="input-field  col m8 offset-m2">
+                                <input id="remarks" type="text" class="validate" name="remarks">
+                                <label for="remarks">Remarks</label>
+                            </div>
+    
+    
+                            <div class="input-field text-right right" style="margin-bottom:20px;">
+                                
+                                    <button type="submit" class="btn">
+                                        Update Facility Record
+                                    </button>                               
+                            
                             </div>
                         </div>
                         

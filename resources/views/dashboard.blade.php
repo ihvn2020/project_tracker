@@ -219,7 +219,7 @@
                     </div>
 
                     <div class="row">
-                        <div class = "col m7">
+                        <div class = "col m6">
                             <h5 class="text-center">Activities / Audit Trails</h5>
                         
                             @if ($audits!=NULL)
@@ -227,9 +227,9 @@
                             <table id="audits" class="display bordered responsive-table" style="width:100%; font-size: 0.8em;">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>Date & Time</th>
-                                        <th>Event/Action</th>
-                                        <th>User</th>
+                                        <th style="width: 20% !important;">Date & Time</th>
+                                        <th style="width: 60% !important;">Event/Action</th>
+                                        <th style="width: 20% !important;">User</th>
                                         
                                        
                                     </tr>
@@ -250,7 +250,6 @@
                                     <tr>                    
                                         <th>Datetime</th>
                                         <th>Event/Action</th>
-                                        <th>Description</th>
                                         <th>User</th>
                                     </tr>
                                 </tfoot>
@@ -266,7 +265,7 @@
                             @endif
                     
                         </div>   
-                        <div class="col m5">
+                        <div class="col m6">
                             <h5 class="text-center">Issues</h5>
                             <hr>
                             @if ($all_variables!=NULL)
@@ -274,10 +273,9 @@
                             <table id="audits" class="display bordered responsive-table" style="width:100%; font-size: 0.8em;">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>Date & Time</th>
-                                        <th>Comments</th>
-                                        <th>Remakrs</th>
-                                        <th>Facility</th>
+                                        <th width="60%">Comments</th>
+                                        <th width="20%">Remarks</th>
+                                        <th width="20%">Facility</th>
                                         
                                        
                                     </tr>
@@ -286,8 +284,7 @@
                                     @foreach ($all_variables as $issue)   
                                     @if ($issue->comments || $issue->remarks != '')
                                         <tr>
-                                            <td>{{$issue->updated_at}}</td>
-                                            <td>{{$issue->comments??''}}</td>
+                                            <td>{!!$issue->comments??''!!}</td>
                                             <td>{{$issue->remarks??''}}</td>
                                             <td>{{$issue->health_facility}}, {{$issue->lga}}, {{$issue->state}}</td>
                                             
@@ -313,3 +310,4 @@
     </main>   
      
 @endsection
+

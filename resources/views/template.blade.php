@@ -58,7 +58,7 @@
                   <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">list</i>Update Tracker<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
                   <div class="collapsible-body">
                     <ul>
-                      <li><a class="waves-effect waves-blue" href="/performance"><i class="material-icons">fullscreen</i>View All<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
+                      <li><a class="waves-effect waves-blue" href="/"><i class="material-icons">fullscreen</i>View All<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
                       <li><a class="waves-effect waves-blue" href="/add_performance"><i class="material-icons">swap_horiz</i>Add New <span class="new badge right yellow darken-3"></span></a></li>
                       <li><a class="waves-effect waves-blue" href="/view_performance"><i class="material-icons">transfer</i>View My Performance<span class="new badge right yellow darken-3"></span></a></li>
                     </ul>
@@ -71,11 +71,11 @@
           <ul class="collapsible collapsible-accordion">
             
                 <li>
-                  <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">list</i>Sites Management<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                  <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">list</i>Facilities Management<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
                   <div class="collapsible-body">
                     <ul>
-                      <li><a class="waves-effect waves-blue" href="/sites"><i class="material-icons">fullscreen</i>View All<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
-                      <li><a class="waves-effect waves-blue" href="/sites"><i class="material-icons">swap_horiz</i>Add New<span class="new badge right yellow darken-3"></span></a></li>
+                      <li><a class="waves-effect waves-blue" href="/facilities"><i class="material-icons">fullscreen</i>View All<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
+                      <li><a class="waves-effect waves-blue" href="/add_facility"><i class="material-icons">swap_horiz</i>Add New<span class="new badge right yellow darken-3"></span></a></li>
                     </ul>
                   </div>
                 </li>
@@ -89,8 +89,8 @@
                   <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">list</i>Indicators / Reporting<i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
                   <div class="collapsible-body">
                     <ul>
-                      <li><a class="waves-effect waves-blue" href="/workload"><i class="material-icons">fullscreen</i>All Site Indicators<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
-                      <li><a class="waves-effect waves-blue" href="/"><i class="material-icons">swap_horiz</i>Add Indicators<span class="new badge right yellow darken-3"></span></a></li>
+                      <li><a class="waves-effect waves-blue" href="/projects"><i class="material-icons">fullscreen</i>All Projects<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
+                      <li><a class="waves-effect waves-blue" href="/add_project"><i class="material-icons">swap_horiz</i>Add Project<span class="new badge right yellow darken-3"></span></a></li>
                     </ul>
                   </div>
                 </li>
@@ -161,27 +161,12 @@
 
       <ul>
           <li>
-              <a class="btn-floating tooltipped" data-position="top" data-tooltip="View All Patients" href="/patients" target="_blank"><i class="material-icons" title>people</i></a>
+              <a class="btn-floating tooltipped" data-position="top" data-tooltip="Users" href="/users" target="_blank"><i class="material-icons" title>people</i></a>
           </li>
           <li>
-              <a class="btn-floating tooltipped" data-position="top" data-tooltip="Samples" href="/samples"><i class="material-icons" title>list</i></a>
+              <a class="btn-floating tooltipped" data-position="top" data-tooltip="HTS and Mobile NMRS" href="/hts"><i class="material-icons" title>mobile</i></a>
           </li>
-          <li>
-          <a class="btn-floating blue tooltipped" data-position="top" data-tooltip="Sites" href="/sites"><i class="material-icons">house</i></a>
-          </li>
-
-          <li> 
-          <a class="btn-floating purple darken-1 tooltipped" data-position="top" data-tooltip="Shipping" href="/shippings"><i class="material-icons">local_shipping
-            </i></a>
-          </li>
-
-          <li>
-          <a class="btn-floating green tooltipped" data-position="top" data-tooltip="Users/Operators" href="/users"><i class="material-icons">people</i></a>          
-          </li>
-
-          <li>
-          <a class="btn-floating blue btn-large tooltipped" data-position="top" data-tooltip="Results" href="/specimens"><i class="material-icons">check</i></a>          
-          </li>
+          
       </ul>
   </div>
 
@@ -245,6 +230,7 @@
     
 </body>
     <script src="{{asset('/js/jquery-3.5.1.js')}}"></script>
+    <?php if(isset($emrsites)){?>
     <script type="text/javascript">
       $(function () {
      
@@ -298,6 +284,7 @@
       });
       });
     </script>
+    <?php } ?>
     <script src="{{asset('/js/pmain.js')}}"></script>
     <script src="{{asset('/js/materialize.min.js')}}"></script>
     <!--<script src="/js/material2.min.css"></script>-->

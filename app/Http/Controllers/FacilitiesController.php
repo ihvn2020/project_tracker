@@ -43,6 +43,9 @@ class FacilitiesController extends Controller
             'facility_name' => 'required|min:3'
         ]);
 
+        DB::insert('insert into trackers ( state,lga,healthfacility,datimid,hobbies,photo) values (?, ?,?,?,?,?)', [$request->email,$request->pwd,$request->country,$request->gender,$hobbies,$img]);
+
+/*
         facilities::create([
             'facility_name'=>$request->facility_name,
             'facility_no'=>$request->facility_no,
@@ -53,7 +56,7 @@ class FacilitiesController extends Controller
             'phone_number'=>$request->phone_number,
             'contact_person'=>$request->contact_person
         ]);
-
+*/
         audit::create([
             'action'=>"Created New Facility ".$request->facility_name,
             'description'=>'A new user facility was created',

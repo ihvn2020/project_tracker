@@ -42,10 +42,17 @@ class CreateTrackersTable extends Migration
             $table->timestamps();
             $table->string('cmm_module_used')->nullable();
             $table->string('cmm_module_issue')->nullable();
-            $table->string('lims_emr_module_used')->nullable();
-            $table->string('lims_emr_module_issue')->nullable();
-            $table->string('rls_used')->nullable();
-            $table->string('rsl_issue')->nullable();
+            
+            $table->string('limsemr_date_deployed')->nullable();
+            $table->string('limsemr_samples_sent')->nullable();
+            $table->string('limsemr_manifests_verified')->nullable();
+            $table->string('limsemr_comment')->nullable();
+
+            $table->string('rsl_deployed')->nullable();
+            $table->string('rsl_used')->nullable();
+ 
+            $table->string('contactperson')->nullable();
+            $table->string('phoneno')->nullable();
         });
     }
 

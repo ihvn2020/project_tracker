@@ -79,8 +79,23 @@ class TrackerController extends Controller
      */
     public function update(Request $request, tracker $tracker)
     {
-        $tracker = tracker::where('id','=', $request->id);
-        $tracker->update([
+        $ftracker = tracker::where('id','=', $request->id)->first();
+
+        if($request->comments!=""){
+
+            $newcomment = "- ".$request->comments." (".date('y-m-d').") <br>".$ftracker->comments;
+        }else{
+            $newcomment = $ftracker->comments;
+        }
+
+        if($request->remarks!=""){
+
+            $newremarks = "- ".$request->remarks." (".date('y-m-d').") <br>".$ftracker->remarks;
+        }else{
+            $newremarks = $ftracker->remarks;
+        }
+
+        $ftracker->update([
             'state'=>$request->state,
             'lga'=>$request->lga,
             'total_patients'=>$request->total_patients,
@@ -99,11 +114,13 @@ class TrackerController extends Controller
             'limsemr_manifests_sent'=>$request->limsemr_manifests_sent, 
             'rsldeployed'=>$request->rsldeployed,
             'rsl_used'=>$request->rsl_used,
-            'comments'=>$request->comments,
+            'comments'=>$newcomment,
             'updated_by'=>Auth::user()->id,
             'date_updated'=>Date("Y-m-d H:m:s"),
             'facilityid'=>$request->facilityid,
-            'remarks'=>$request->remarks,
+            'remarks'=>$newremarks,
+            'contactperson'=>$request->contactperson,
+            'phoneno'=>$request->phoneno,
         ]);
 
         audit::create([

@@ -8,12 +8,12 @@
                 <hr>
 
                 <p><b>Getting Started: </b><br>
-                This application is used in the management of TB activities accross the Sample Collection Reference Labs and Sequencing Labs In Nigeria. It is developed with PHP Scripting Language / MySQl Database for data storage.
+                This application is used in the monitoring project deployment, implementation and tracking of progress.
                 </p>
                 <hr>
                 <p><b>Contact Information:</b><br>
-                <b>Contact Person:</b> Mr David Meshack<br>
-                P.O. IHVN, Abuja<br>
+                <b>Contact Person:</b> Mr Steve Jobs<br>
+                S.P.O., Health Informatics, Strategic Information, IHVN Central Office, Abuja<br>
                 <b>E-mail:</b> mdavid@ihvnigeria.org<br>
                 <b>Phone Number:</b> 07012345678
                 </p>
