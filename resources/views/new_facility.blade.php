@@ -21,9 +21,9 @@
                         </div>
 
                         <div class="input-field">
-                                <select  onchange="toggleLGA(this);" name="state" id="state">
-                                    <option value="" selected="selected">- Select -</option>
-                                    <option value="Abuja FCT">Abuja FCT</option>
+                                <select  onchange="toggleLGA(this);" name="state" id="state" class="browser-default form-control">
+                                    <option value="" selected="selected">- Select State -</option>
+                                    <option value="FCT">FCT</option>
                                     <option value="Abia">Abia</option>
                                     <option value="Adamawa">Adamawa</option>
                                     <option value="Akwa Ibom">Akwa Ibom</option>
@@ -48,7 +48,7 @@
                                     <option value="Kogi">Kogi</option>
                                     <option value="Kwara">Kwara</option>
                                     <option value="Lagos">Lagos</option>
-                                    <option value="Nassarawa">Nassarawa</option>
+                                    <option value="Nasarawa">Nasarawa</option>
                                     <option value="Niger">Niger</option>
                                     <option value="Ogun">Ogun</option>
                                     <option value="Ondo">Ondo</option>
@@ -62,29 +62,28 @@
                                     <option value="Zamfara">Zamfara</option>
                                     <option value="Outside Nigeria">Outside Nigeria</option>
                                 </select>
-                                <label for="state">State (For Nigeria)</label>
+                                
                         </div>
 
                         <div class="input-field">
-                                <select name="lga" id="lga" class="select-lga">
+                                <select name="lga" id="lga" class="browser-default select-lga">
                                 <option selected value="Select LGA">Select LGA</option>
                                 </select>
-                                <label for="lga">LGA</label>
+                                
                         </div>
 
                         <div class="input-field">
-                                <input id="town" type="text" class="validate" name="town" required>
-                                <label for="town">Town/District</label>
+                                <select name="lgainstance" id="lgainstance" class="form-control">
+                                    <option value="" selected="selected">LGA Instance ?</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>                                   
+                                </select>
+                                
                         </div>
 
                         <div class="input-field">
-                                <input id="address" type="text" class="validate" name="address" required>
-                                <label for="address">Address</label>
-                        </div>
-
-                        <div class="input-field">
-                                <input id="phone_number" type="text" class="validate" name="phone_number" required>
-                                <label for="phone_number">Phone Number</label>
+                                <input id="phoneno" type="text" class="validate" name="phoneno" required>
+                                <label for="phoneno">Phone Number</label>
                         </div>
 
                         <div class="input-field">
@@ -100,11 +99,12 @@
                                 </button>                               
                         
                         </div>
+
                     </form>
                 
             
         </div>
     </div>
 </div>
-<script src="{{asset('/js/lga.js')}}"></script>
+<script src="{{asset('/js/lga.min.js')}}"></script>
 @endsection

@@ -121,6 +121,8 @@ class TrackerController extends Controller
             'remarks'=>$newremarks,
             'contactperson'=>$request->contactperson,
             'phoneno'=>$request->phoneno,
+            'uploading_on_ndr'=>$request->uploading_on_ndr,
+            'nmrs_mobile_in_use'=>$request->nmrs_mobile_in_use,
         ]);
 
         audit::create([

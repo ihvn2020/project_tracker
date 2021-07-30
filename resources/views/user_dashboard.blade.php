@@ -17,7 +17,7 @@
 
             <input type="hidden" name="trackfilters[]" value="health_facility">
 
-            <h6 class="text-center center">Filter Specific Variables</h6>
+            <h6 class="text-center center">Filter Specific Project/Activity</h6>
             <h6 style="clear: both;"><a href="/broadsheet" class="text-green center btn btn-inline">OR Click here to view entire record on a broadsheet</a></h6>
 
             <div class="col m3">
@@ -64,8 +64,13 @@
                     <tr>
                         <td>
                             <input type="checkbox" class="filled-in"  id="total_patients" name="trackfilters[]" value="total_patients">
-                            <label for="total_patients">Total #of Patients</label>
+                            <label for="total_patients"># Patients</label>
                         </td>
+                        <td>
+                            <input type="checkbox" class="filled-in"  id="uploading_on_ndr" name="trackfilters[]" value="uploading_on_ndr">
+                            <label for="total_patients"># on NDR</label>
+                        </td>
+                        
                         <td>
                             <input type="checkbox" class="filled-in"  id="pcr_lab_linked" name="trackfilters[]" value="pcr_lab_linked">
                             <label for="pcr_lab_linked">Linked PCR</label>
@@ -139,12 +144,41 @@
             </thead>
             <tbody>
                 @foreach ($facilities as $facility)                 
-                
+                @if($facility->lga_instance=="Yes")
+                <tr>                    
+                    
+                    <td>{{$facility->lga}}</td>
+                    <td style="width: 20% !important;">{{$facility->health_facility}} @if($facility->lga_instance=="Yes") <br><small style="color: orange;">LGA Instance</small>@endif</td>
+                    
+                    <td>
+                       
+                            <div class="row">
+                                <div class="input-field col m2">
+                                    {{$facility->uploading_on_ndr}}
+                                    <br><small style="color: green;">Records on NDR</small>
+                                </div>
+                                <div class="input-field col m2">
+                                    {{$facility->nmrs_mobile_in_use}}
+                                    <br><small style="color: green;">NMRS Mobile in Use</small>
+                                </div>
+                                <div class="input-field col m5">
+                                    {{$facility->total_patients}}
+                                    
+                                    <br><small style="color: green;">Ever Enrolled</small>
+                                </div>
+                                
+                    </td>                   
+                    
+                    <td>                    
+                    <a href="/tfacility/{{$facility->id}}" class="btn-floating small btn-mini blue darken-2" style="margin-top: -20px !important;"><i class="large material-icons">edit</i></a>
+                    </td>
+                </tr>
+                @else
                 <tr>
                     
                     
                     <td>{{$facility->lga}}</td>
-                    <td style="width: 20% !important;">{{$facility->health_facility}}</td>
+                    <td style="width: 20% !important;">{{$facility->health_facility}} @if($facility->lga_instance=="Yes") <br><small style="color: orange;">LGA Instance</small>@endif</td>
                     
                     <td>
                         <form action="{{route('dailyreports.store')}}" method="post" style="width: 90% !important;">
@@ -199,13 +233,14 @@
                     <a href="/tfacility/{{$facility->id}}" class="btn-floating small btn-mini blue darken-2" style="margin-top: -20px !important;"><i class="large material-icons">edit</i></a>
                     </td>
                 </tr>
+                @endif
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>                    
                     <th>LGA</th>
                     <th style="width: 20% !important;">Health Facility</th>
-                    <th>TX_CURR</th>
+                    <th></th>
                     <th>Actions</th>
                 </tr>
             </tfoot>

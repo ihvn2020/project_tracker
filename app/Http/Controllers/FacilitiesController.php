@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\tracker;
 use App\facilities;
 use App\audit;
 use Auth;
 use Illuminate\Http\Request;
+use DB;
 
 class FacilitiesController extends Controller
 {
@@ -43,7 +45,7 @@ class FacilitiesController extends Controller
             'facility_name' => 'required|min:3'
         ]);
 
-        DB::insert('insert into trackers ( state,lga,healthfacility,datimid,hobbies,photo) values (?, ?,?,?,?,?)', [$request->email,$request->pwd,$request->country,$request->gender,$hobbies,$img]);
+        DB::insert('insert into trackers ( state,lga,health_facility,datim_id,contactperson,phoneno,lga_instance) values (?, ?,?,?,?,?,?)', [$request->state,$request->lga,$request->facility_name,$request->facility_no,$request->contactperson,$request->phoneno,$request->lga_instance]);
 
 /*
         facilities::create([

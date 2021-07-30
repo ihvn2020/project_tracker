@@ -15,7 +15,7 @@
                         <input type="hidden" name="id" value="{{$facility->id}}" >
 
                         <div class="row">
-                            <div class="col s4">
+                            <div class="col s3">
                                 <div class="input-field">
                                     <input id="health_facility" type="text" class="validate" name="health_facility" value="{{$facility->health_facility}}" autofocus>
                                     <label for="health_facility">Facility Name</label>
@@ -79,11 +79,14 @@
                                 </div>
         
                                 <div class="input-field">
-                                        <input id="total_patients" type="number" class="validate" name="total_patients">
-                                        <label for="total_patients" value="{{$facility->total_patients}}">Ever Enrolled</label>
+                                        <input id="total_patients" type="number"  value="{{$facility->total_patients}}" class="validate" name="total_patients">
+                                        <label for="total_patients">Ever Enrolled</label>
                                 </div>
-        
-                                
+
+                                <div class="input-field">
+                                    <input id="uploading_on_ndr" type="number" class="validate" name="uploading_on_ndr"value="{{$facility->uploading_on_ndr}}">
+                                    <label for="uploading_on_ndr">Uploads on NDR</label>
+                                </div>
         
                                 <div class="input-field">
                                     <input id="tx_curr" type="number" class="validate" name="tx_curr"value="{{$facility->tx_curr}}" readonly>
@@ -105,7 +108,7 @@
                                 
                                 
                             </div>
-                            <div class="col s7 offset-m1">
+                            <div class="col s8 offset-m1">
                                 @if (auth()->user()->role=="Facility Manager")
                                     <input type="hidden" name="bio_service_update" value="{{$facility->bio_service_update}}">
                                     <input type="hidden" name="cmm_module" value="{{$facility->cmm_module}}">
@@ -122,11 +125,12 @@
                                 <div class="row">
                                     <div class="col s12  z-depth-1">
                                         <ul class="tabs" style="font-size: 80% !important;">
-                                        <li class="tab col s3"><a href="#test1">LIMS/EMR Integration</a></li>
+                                        <li class="tab col s2"><a href="#test1">LIMS/EMR Integration</a></li>
                                         <li class="tab col s2"><a href="#test2">Commodity Module</a></li>
                                         <li class="tab col s2"><a href="#test3">RSL Module</a></li>
                                         <li class="tab col s2"><a href="#test4">PBS Update</a></li>
-                                        <li class="tab col s3"><a href="#test5">Enterprise NMRS</a></li>
+                                        <li class="tab col s2"><a href="#test5">Enterprise NMRS</a></li>
+                                        <li class="tab col s2"><a href="#test6">HTS</a></li>
                                         </ul>
                                     </div>
                                     <div id="test1" class="col s12">
@@ -352,6 +356,32 @@
                                                             <input id="central_database_upload" type="date" class="validate datepicker" name="central_database_upload"value="{{$facility->central_database_upload}}">
                                                         </td>
                                                     </tr>
+                                                </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="test6" class="col s12">
+                                        <table class="table table-striped table-inverse table-responsive">
+                                            <thead class="thead-inverse">
+                                                <tr>
+                                                   
+                                                    <th>Services Deployed</th>
+                                                    <th></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        
+                                                        <td>Mobile NMRS in Use?</td>
+                                                        <td class="input-field">
+                                                            <select name="nmrs_mobile_in_use" id="nmrs_mobile_in_use" {{$disabled??''}}>
+                                                                <option selected value="{{$facility->nmrs_mobile_in_use}}">{{$facility->nmrs_mobile_in_use}}</option>
+                                                                <option value="Yes">Yes</option>
+                                                                <option value="No">No</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    
                                                 </tbody>
                                         </table>
                                     </div>

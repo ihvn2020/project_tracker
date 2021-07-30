@@ -50,7 +50,12 @@ class CreateTrackersTable extends Migration
 
             $table->string('rsl_deployed')->nullable();
             $table->string('rsl_used')->nullable();
- 
+
+            $table->string('nmrs_lga_deployed')->nullable();
+            $table->string('nmrs_lga_uploading_ndr')->nullable();
+            $table->string('mobile_nmrs')->nullable();
+            $table->string('current_hts')->nullable();
+            
             $table->string('contactperson')->nullable();
             $table->string('phoneno')->nullable();
         });
